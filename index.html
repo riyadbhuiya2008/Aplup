@@ -1,0 +1,3096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<!-- ═══ BASIC SEO ═══ -->
+<title>Aplup - Android App Marketplace | Download Apps, Games & AI Tools</title>
+<meta name="description" content="Aplup is a smart Android app marketplace. Discover and use apps, games, AI tools, and more in one place. Enjoy fast downloads, offline access, and supported instant app experiences that let you use compatible apps without installing them. Aplup offers a secure, simple, and modern way to explore Android apps.">
+<meta name="keywords" content="Aplup, app store, android apps, apk download, games, ai tools, app marketplace">
+<meta name="author" content="Aplup">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://aplup.com">
+
+<!-- ═══ FAVICON ═══ -->
+<link rel="icon" type="image/png" href="https://i.ibb.co.com/9kHrPbwM/165298-removebg-preview.png">
+<link rel="apple-touch-icon" href="https://i.ibb.co.com/9kHrPbwM/165298-removebg-preview.png">
+
+<!-- ═══ OPEN GRAPH (Facebook / WhatsApp preview) ═══ -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Aplup - Android App Marketplace">
+<meta property="og:description" content="Discover and use apps, games, AI tools, and more in one place. Fast downloads, offline access, and a secure, modern way to explore Android apps.">
+<meta property="og:image" content="https://i.ibb.co.com/9kHrPbwM/165298-removebg-preview.png">
+<meta property="og:url" content="https://aplup.com">
+<meta property="og:site_name" content="Aplup">
+
+<!-- ═══ TWITTER CARD ═══ -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Aplup - Android App Marketplace">
+<meta name="twitter:description" content="Discover and use apps, games, AI tools, and more in one place. Fast, secure, and modern.">
+<meta name="twitter:image" content="https://i.ibb.co.com/9kHrPbwM/165298-removebg-preview.png">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   RESET & ROOT VARIABLES
+═══════════════════════════════════════════════════════════ */
+*, *::before, *::after {
+  margin: 0; padding: 0; box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+}
+
+:root {
+  --bg:          #07090F;
+  --bg2:         #0A0D16;
+  --surface:     #0E1220;
+  --surface2:    #141828;
+  --surface3:    #1A2038;
+  --border:      rgba(255,255,255,0.06);
+  --border2:     rgba(255,255,255,0.11);
+  --border3:     rgba(255,255,255,0.18);
+  --accent:      #4F8EF7;
+  --accent2:     #7B5FFF;
+  --accent-glow: rgba(79,142,247,0.22);
+  --text:        #EEF2FF;
+  --text2:       #A8B4D0;
+  --muted:       #5C6B8A;
+  --danger:      #F75F5F;
+  --danger-bg:   rgba(247,95,95,0.1);
+  --success:     #3DD68C;
+  --success-bg:  rgba(61,214,140,0.1);
+  --warning:     #F7C355;
+  --warning-bg:  rgba(247,195,85,0.1);
+  --gold:        #F2C879;
+  --gold2:       #C9934A;
+  --gold-bg:     rgba(242,200,121,0.08);
+  --gold-border: rgba(242,200,121,0.22);
+  --radius-sm:   10px;
+  --radius:      14px;
+  --radius-lg:   20px;
+  --radius-xl:   24px;
+  --shadow-sm:   0 2px 8px rgba(0,0,0,0.25);
+  --shadow:      0 4px 20px rgba(0,0,0,0.35);
+  --shadow-lg:   0 8px 40px rgba(0,0,0,0.5);
+  --font:        -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+  --transition:  0.18s cubic-bezier(0.4,0,0.2,1);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  height: 100dvh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════════════════════ */
+@keyframes spin       { to { transform: rotate(360deg); } }
+@keyframes fadeIn     { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeInFast { from { opacity:0; } to { opacity:1; } }
+@keyframes slideUp    { from { transform:translateY(100%); } to { transform:translateY(0); } }
+@keyframes slideDown  { from { transform:translateY(-20px); opacity:0; } to { transform:translateY(0); opacity:1; } }
+@keyframes pulse      { 0%,100% { opacity:1; box-shadow:0 0 0 0 rgba(242,200,121,0.4); } 50% { opacity:0.7; box-shadow:0 0 0 6px rgba(242,200,121,0); } }
+@keyframes shimmer    { 0% { background-position:-400% 0; } 100% { background-position:400% 0; } }
+@keyframes tickerMove { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+@keyframes toastIn    { from { transform:translateX(-50%) translateY(80px); opacity:0; } to { transform:translateX(-50%) translateY(0); opacity:1; } }
+@keyframes toastOut   { from { transform:translateX(-50%) translateY(0); opacity:1; } to { transform:translateX(-50%) translateY(80px); opacity:0; } }
+@keyframes glow       { 0%,100% { box-shadow:0 0 20px rgba(79,142,247,0.2); } 50% { box-shadow:0 0 40px rgba(79,142,247,0.5); } }
+@keyframes loadingBar { from { width:0; } to { width:100%; } }
+@keyframes floatUp    { 0% { transform:translateY(0); } 50% { transform:translateY(-6px); } 100% { transform:translateY(0); } }
+@keyframes dlProgress { from { width:0%; } to { width:100%; } }
+@keyframes dlPulse    { 0%,100%{opacity:1;} 50%{opacity:0.5;} }
+
+/* ═══════════════════════════════════════════════════════════
+   LOADING SCREEN
+═══════════════════════════════════════════════════════════ */
+#loading-screen {
+  position: fixed; inset: 0;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  z-index: 9999; gap: 0;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+#loading-screen.fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.loading-orb {
+  position: relative; width: 88px; height: 88px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 24px;
+}
+.loading-orb::before {
+  content: '';
+  position: absolute; inset: -3px;
+  border-radius: 26px;
+  background: conic-gradient(from 0deg, var(--accent), var(--accent2), var(--accent));
+  animation: spin 2s linear infinite;
+  opacity: 0.6;
+}
+.loading-orb::after {
+  content: '';
+  position: absolute; inset: -2px;
+  border-radius: 26px;
+  background: var(--bg);
+  z-index: 0;
+}
+.loading-logo-inner {
+  width: 80px; height: 80px; border-radius: 22px;
+  background: linear-gradient(135deg, var(--surface), var(--surface2));
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; z-index: 1; position: relative;
+  border: 1px solid var(--border2);
+}
+.loading-logo-inner img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.loading-app-name {
+  font-size: 22px; font-weight: 800; letter-spacing: -0.5px;
+  background: linear-gradient(135deg, var(--text), var(--text2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 6px;
+}
+.loading-app-sub { font-size: 13px; color: var(--muted); margin-bottom: 36px; letter-spacing: 0.2px; }
+.loading-bar-wrap {
+  width: 160px; height: 3px; background: var(--border2);
+  border-radius: 999px; overflow: hidden;
+}
+.loading-bar-fill {
+  height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  animation: loadingBar 2s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HOME SCREEN LAYOUT
+═══════════════════════════════════════════════════════════ */
+#home-screen {
+  height: 100dvh;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  opacity: 0; transition: opacity 0.4s ease;
+}
+#home-screen.visible { opacity: 1; }
+
+/* ═══════════════════════════════════════════════════════════
+   OFFLINE BANNER
+═══════════════════════════════════════════════════════════ */
+#offline-banner {
+  display: none; align-items: center; justify-content: center; gap: 8px;
+  background: linear-gradient(135deg, #F7B955, #F75F5F);
+  color: #fff; font-size: 12px; font-weight: 700;
+  padding: 8px 16px; flex-shrink: 0; letter-spacing: 0.3px;
+}
+#offline-banner.show { display: flex; }
+
+/* ═══════════════════════════════════════════════════════════
+   AD TICKER
+═══════════════════════════════════════════════════════════ */
+#ad-ticker {
+  display: none; flex-shrink: 0;
+  background: linear-gradient(90deg, rgba(79,142,247,0.08), rgba(123,95,255,0.08));
+  border-bottom: 1px solid var(--border);
+  padding: 6px 0; overflow: hidden; white-space: nowrap;
+}
+#ad-ticker.show { display: block; }
+.ticker-track { display: inline-flex; gap: 0; animation: tickerMove 20s linear infinite; }
+.ticker-segment {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 0 20px; font-size: 12px; font-weight: 600; color: var(--accent);
+}
+.ticker-ad-pill {
+  background: var(--accent); color: #fff;
+  font-size: 9px; font-weight: 800; padding: 2px 6px;
+  border-radius: 4px; letter-spacing: 0.5px; flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TOP BAR
+═══════════════════════════════════════════════════════════ */
+.top-bar {
+  flex-shrink: 0; position: relative; z-index: 10;
+  background: rgba(10,13,22,0.92);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 14px;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+}
+.top-bar::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(79,142,247,0.45), rgba(123,95,255,0.45), transparent);
+}
+
+.top-brand { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
+.brand-logo {
+  width: 38px; height: 38px; border-radius: 11px; flex-shrink: 0;
+  background: transparent;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; border: 1px solid var(--border2);
+}
+.brand-logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.brand-info { min-width: 0; }
+.brand-name {
+  font-size: 15px; font-weight: 800; letter-spacing: -0.3px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.brand-tagline {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 10.5px; color: var(--muted); margin-top: 1px;
+}
+.brand-live-dot {
+  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+  background: var(--gold); animation: pulse 2.5s ease-in-out infinite;
+}
+
+.top-actions { display: flex; align-items: center; gap: 7px; flex-shrink: 0; }
+
+.icon-btn {
+  width: 36px; height: 36px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border2);
+  background: var(--surface2); color: var(--text);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: var(--transition); flex-shrink: 0;
+  font-family: var(--font); position: relative;
+}
+.icon-btn:active { transform: scale(0.88); }
+.icon-btn.active {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border-color: transparent; box-shadow: 0 2px 12px var(--accent-glow);
+}
+.icon-btn.gold-btn {
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  border-color: transparent; color: #1a1208;
+  box-shadow: 0 2px 12px rgba(242,200,121,0.3);
+}
+
+.auth-btns { display: flex; align-items: center; gap: 7px; }
+.btn-sign-in {
+  padding: 8px 14px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border2); background: transparent;
+  color: var(--text2); font-size: 13px; font-weight: 700;
+  cursor: pointer; font-family: var(--font); transition: var(--transition);
+}
+.btn-sign-in:active { opacity: 0.7; }
+.btn-sign-up {
+  padding: 8px 14px; border-radius: var(--radius-sm);
+  border: none;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff; font-size: 13px; font-weight: 700;
+  cursor: pointer; font-family: var(--font);
+  box-shadow: 0 2px 10px var(--accent-glow); transition: var(--transition);
+}
+.btn-sign-up:active { transform: scale(0.95); }
+
+.user-avatar-btn {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800; color: #fff;
+  cursor: pointer; flex-shrink: 0; position: relative;
+  border: 2px solid transparent; transition: var(--transition);
+}
+.user-avatar-btn.premium-user {
+  border-color: var(--gold);
+  box-shadow: 0 0 12px rgba(242,200,121,0.3);
+}
+.avatar-crown {
+  position: absolute; bottom: -3px; right: -3px;
+  width: 15px; height: 15px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  border: 2px solid var(--bg); color: #1a1208;
+  display: none; align-items: center; justify-content: center;
+}
+.user-avatar-btn.premium-user .avatar-crown { display: flex; }
+
+/* ═══════════════════════════════════════════════════════════
+   SEARCH BAR
+═══════════════════════════════════════════════════════════ */
+.search-wrap {
+  flex-shrink: 0; max-height: 0; overflow: hidden;
+  background: var(--surface); border-bottom: 1px solid transparent;
+  transition: max-height 0.28s cubic-bezier(0.4,0,0.2,1),
+              padding    0.28s cubic-bezier(0.4,0,0.2,1),
+              border-color 0.28s ease;
+}
+.search-wrap.open {
+  max-height: 68px; padding: 10px 14px;
+  border-bottom-color: var(--border);
+}
+.search-inner {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: var(--radius); padding: 0 14px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.search-inner:focus-within {
+  border-color: rgba(79,142,247,0.5);
+  box-shadow: 0 0 0 3px rgba(79,142,247,0.1);
+}
+.search-inner svg { color: var(--muted); flex-shrink: 0; }
+.search-inner input {
+  flex: 1; background: transparent; border: none; outline: none;
+  color: var(--text); font-size: 14px; font-family: var(--font);
+  padding: 12px 0;
+}
+.search-inner input::placeholder { color: var(--muted); }
+.search-clear {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--surface3); border: none; color: var(--text2);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; flex-shrink: 0; transition: var(--transition);
+}
+.search-clear:active { transform: scale(0.85); }
+
+/* ═══════════════════════════════════════════════════════════
+   TABS / SECTION HEADER
+═══════════════════════════════════════════════════════════ */
+.section-tabs {
+  display: flex; align-items: center; gap: 6px;
+  padding: 10px 14px 0; flex-shrink: 0;
+  overflow-x: auto; scrollbar-width: none;
+}
+.section-tabs::-webkit-scrollbar { display: none; }
+.tab-pill {
+  flex-shrink: 0; padding: 7px 14px; border-radius: 999px;
+  border: 1px solid var(--border2); background: transparent;
+  color: var(--text2); font-size: 12.5px; font-weight: 700;
+  cursor: pointer; font-family: var(--font); transition: var(--transition);
+  white-space: nowrap;
+}
+.tab-pill.active {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border-color: transparent; color: #fff;
+  box-shadow: 0 2px 10px var(--accent-glow);
+}
+.tab-pill:active { transform: scale(0.93); }
+
+/* ═══════════════════════════════════════════════════════════
+   AD SLOTS — TOP BANNER
+═══════════════════════════════════════════════════════════ */
+#ad-top-banner {
+  margin: 10px 14px 0; border-radius: var(--radius); overflow: hidden;
+  display: none; flex-shrink: 0;
+}
+#ad-top-banner.show { display: block; }
+#ad-top-banner img, #ad-top-banner a { display: block; width: 100%; border-radius: var(--radius); }
+
+/* ═══════════════════════════════════════════════════════════
+   CATEGORY GRID
+═══════════════════════════════════════════════════════════ */
+.cat-scroll {
+  flex: 1; overflow-y: auto; padding: 10px 14px 90px;
+  -webkit-overflow-scrolling: touch; scrollbar-width: none;
+}
+.cat-scroll::-webkit-scrollbar { display: none; }
+
+#ad-mid-strip {
+  margin: 4px 0; border-radius: var(--radius); overflow: hidden;
+  display: none;
+}
+#ad-mid-strip.show { display: block; }
+#ad-mid-strip img { width: 100%; display: block; border-radius: var(--radius); }
+
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  align-content: start;
+}
+
+/* ── Category Card ── */
+.cat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg); overflow: hidden;
+  cursor: pointer; transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+  -webkit-user-select: none; user-select: none;
+  display: flex; flex-direction: column;
+  animation: fadeIn 0.3s ease both;
+  position: relative;
+}
+.cat-card:active { transform: scale(0.94); }
+.cat-card:hover {
+  border-color: rgba(79,142,247,0.3);
+  box-shadow: 0 8px 28px rgba(79,142,247,0.12);
+  transform: translateY(-3px);
+}
+
+.cat-thumb {
+  width: 100%; aspect-ratio: 1/1; overflow: hidden;
+  background: var(--surface2); flex-shrink: 0; position: relative;
+}
+.cat-thumb img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.3s ease;
+}
+.cat-card:hover .cat-thumb img { transform: scale(1.05); }
+.cat-thumb-fallback {
+  width: 100%; height: 100%; display: flex; align-items: center;
+  justify-content: center; color: var(--muted); opacity: 0.4;
+}
+
+/* Badges on thumb */
+.thumb-badge {
+  position: absolute; top: 8px; font-size: 10px; font-weight: 800;
+  padding: 3px 8px; border-radius: 7px; letter-spacing: 0.4px;
+  display: flex; align-items: center; gap: 4px;
+}
+.badge-apk  { right: 8px; background: linear-gradient(135deg, #3DD68C, #1DB970); color: #fff; }
+.badge-offline { left: 8px; background: linear-gradient(135deg, #F7B955, #F75F5F); color: #fff; }
+.badge-new  { right: 8px; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; }
+
+/* Lock overlay */
+.cat-card.locked .cat-thumb img,
+.cat-card.locked .cat-thumb-fallback { filter: blur(7px) brightness(0.5); }
+.cat-card.locked .cat-thumb::after {
+  content: ''; position: absolute; inset: 0;
+  background: rgba(0,0,0,0.25);
+}
+.lock-badge {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  width: 42px; height: 42px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  color: #1a1208;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 3; box-shadow: 0 4px 18px rgba(0,0,0,0.4);
+  animation: floatUp 2.5s ease-in-out infinite;
+}
+
+/* Card body */
+.cat-body { padding: 10px 10px 12px; }
+.cat-name {
+  font-size: 13px; font-weight: 700; color: var(--text);
+  text-align: center; line-height: 1.35; margin-bottom: 6px;
+  display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
+  word-break: break-word;
+}
+.cat-meta {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; flex-wrap: wrap;
+}
+.meta-chip {
+  display: inline-flex; align-items: center; gap: 3px;
+  font-size: 10.5px; font-weight: 700;
+}
+.meta-chip.views   { color: var(--muted); }
+.meta-chip.popular { color: var(--warning); }
+.meta-chip.premium { color: var(--gold); }
+
+/* ── Skeleton ── */
+.skeleton-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+.skel-thumb {
+  width: 100%; aspect-ratio: 1/1;
+  background: linear-gradient(90deg, var(--surface) 25%, var(--surface2) 50%, var(--surface) 75%);
+  background-size: 400% 100%; animation: shimmer 1.6s infinite;
+}
+.skel-text {
+  height: 13px; margin: 10px 16px 6px; border-radius: 7px;
+  background: linear-gradient(90deg, var(--surface) 25%, var(--surface2) 50%, var(--surface) 75%);
+  background-size: 400% 100%; animation: shimmer 1.6s infinite;
+}
+.skel-text2 {
+  height: 10px; margin: 0 24px 14px; border-radius: 7px;
+  background: linear-gradient(90deg, var(--surface) 25%, var(--surface2) 50%, var(--surface) 75%);
+  background-size: 400% 100%; animation: shimmer 1.6s infinite; opacity: 0.6;
+}
+
+/* ── In-feed ad card ── */
+.ad-infeed {
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: var(--radius-lg); overflow: hidden;
+  position: relative; cursor: pointer;
+}
+.ad-infeed .ad-label {
+  position: absolute; top: 8px; left: 8px;
+  background: rgba(79,142,247,0.18); color: var(--accent);
+  font-size: 9px; font-weight: 800; padding: 3px 7px;
+  border-radius: 5px; letter-spacing: 0.5px; z-index: 2;
+}
+.ad-infeed img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
+.ad-infeed .ad-caption { font-size: 11px; color: var(--muted); text-align: center; padding: 8px; font-weight: 700; }
+
+/* ── Empty / Error states ── */
+.empty-state { grid-column: 1/-1; text-align: center; padding: 60px 20px; color: var(--muted); }
+.empty-state svg { opacity: 0.4; margin-bottom: 14px; }
+.empty-state .es-title { font-size: 15px; font-weight: 700; color: var(--text2); margin-bottom: 6px; }
+.empty-state .es-sub   { font-size: 13px; line-height: 1.6; }
+.offline-state { grid-column: 1/-1; text-align: center; padding: 50px 20px; }
+.offline-state svg { margin-bottom: 14px; color: var(--muted); opacity: 0.5; }
+.offline-state .os-title { font-size: 16px; font-weight: 800; margin-bottom: 6px; }
+.offline-state .os-sub   { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* ═══════════════════════════════════════════════════════════
+   DOWNLOADS SECTION
+═══════════════════════════════════════════════════════════ */
+.downloads-list {
+  flex: 1; overflow-y: auto; padding: 12px 14px 80px;
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.downloads-list::-webkit-scrollbar { display: none; }
+
+.dl-item {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px;
+  margin-bottom: 10px; animation: fadeIn 0.25s ease both;
+  transition: var(--transition);
+}
+.dl-item:active { transform: scale(0.98); }
+.dl-item-icon {
+  width: 46px; height: 46px; border-radius: 13px; flex-shrink: 0;
+  background: linear-gradient(135deg, rgba(61,214,140,0.15), rgba(29,185,112,0.1));
+  border: 1px solid rgba(61,214,140,0.2);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--success);
+}
+.dl-item-info { flex: 1; min-width: 0; }
+.dl-item-name {
+  font-size: 14px; font-weight: 700; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis; margin-bottom: 3px;
+}
+.dl-item-date { font-size: 11.5px; color: var(--muted); }
+.dl-item-badge {
+  flex-shrink: 0; background: rgba(61,214,140,0.12);
+  color: var(--success); font-size: 11px; font-weight: 800;
+  padding: 4px 9px; border-radius: 7px;
+}
+
+.dl-empty {
+  text-align: center; padding: 70px 20px;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.dl-empty svg { color: var(--muted); opacity: 0.35; }
+.dl-empty .de-title { font-size: 16px; font-weight: 800; color: var(--text2); }
+.dl-empty .de-sub   { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* ═══════════════════════════════════════════════════════════
+   BOTTOM NAV
+═══════════════════════════════════════════════════════════ */
+.bottom-nav {
+  flex-shrink: 0; position: relative; z-index: 20;
+  background: rgba(10,13,22,0.96);
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid var(--border);
+  display: flex; align-items: stretch; padding: 0 8px;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+.bottom-nav::before {
+  content: '';
+  position: absolute; left: 0; right: 0; top: -1px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(79,142,247,0.3), rgba(123,95,255,0.3), transparent);
+}
+.nav-item {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 4px; padding: 10px 4px 12px;
+  cursor: pointer; color: var(--muted);
+  transition: color var(--transition); position: relative;
+  font-family: var(--font);
+}
+.nav-item:active { opacity: 0.7; }
+.nav-item.active { color: var(--accent); }
+.nav-item svg { flex-shrink: 0; }
+.nav-label { font-size: 10.5px; font-weight: 700; white-space: nowrap; }
+.nav-item.active .nav-label { color: var(--accent); }
+.nav-badge {
+  position: absolute; top: 8px; right: calc(50% - 14px);
+  background: var(--danger); color: #fff; font-size: 9px; font-weight: 800;
+  min-width: 16px; height: 16px; border-radius: 8px; padding: 0 4px;
+  display: none; align-items: center; justify-content: center;
+  border: 2px solid var(--bg);
+}
+.nav-badge.show { display: flex; }
+
+/* ═══════════════════════════════════════════════════════════
+   CONTENT / VIEWER SCREEN
+═══════════════════════════════════════════════════════════ */
+#content-screen {
+  display: none; position: fixed; inset: 0;
+  background: #000; flex-direction: column; z-index: 50;
+}
+#content-screen.visible { display: flex; }
+
+.viewer-bar {
+  height: 52px; background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; padding: 0 14px; gap: 12px; flex-shrink: 0;
+}
+.viewer-back-btn {
+  background: none; border: none; color: var(--accent);
+  font-size: 14px; font-weight: 700; cursor: pointer;
+  display: flex; align-items: center; gap: 6px; padding: 8px 0;
+  font-family: var(--font); transition: var(--transition);
+}
+.viewer-back-btn:active { opacity: 0.6; }
+.viewer-title {
+  font-size: 15px; font-weight: 700; color: var(--text);
+  flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+#content-iframe { flex: 1; width: 100%; border: none; display: block; }
+#ad-content-bottom {
+  flex-shrink: 0; background: var(--surface);
+  border-top: 1px solid var(--border); padding: 8px 12px;
+  display: none;
+}
+#ad-content-bottom.show { display: block; }
+#ad-content-bottom img { width: 100%; border-radius: var(--radius-sm); display: block; }
+
+/* ═══════════════════════════════════════════════════════════
+   IN-APP DOWNLOAD SCREEN
+═══════════════════════════════════════════════════════════ */
+#download-screen {
+  display: none; position: fixed; inset: 0;
+  background: var(--bg); flex-direction: column;
+  z-index: 80; align-items: center; justify-content: center;
+  padding: 32px 24px;
+}
+#download-screen.visible { display: flex; }
+
+.dl-screen-icon {
+  width: 96px; height: 96px; border-radius: 28px;
+  background: linear-gradient(135deg, var(--surface2), var(--surface3));
+  border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 24px; position: relative; overflow: hidden;
+}
+.dl-screen-icon img {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 28px;
+}
+.dl-screen-icon-fallback {
+  color: var(--success);
+}
+.dl-screen-name {
+  font-size: 20px; font-weight: 800; letter-spacing: -0.4px;
+  text-align: center; margin-bottom: 6px;
+}
+.dl-screen-sub {
+  font-size: 13px; color: var(--muted); margin-bottom: 36px;
+  text-align: center;
+}
+
+/* Progress Ring */
+.dl-progress-wrap {
+  width: 100%; background: var(--surface);
+  border: 1px solid var(--border2); border-radius: var(--radius-lg);
+  padding: 20px; margin-bottom: 20px;
+}
+.dl-progress-top {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 14px;
+}
+.dl-progress-label {
+  font-size: 13px; font-weight: 700; color: var(--text2);
+  display: flex; align-items: center; gap: 7px;
+}
+.dl-progress-label .dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--success); animation: dlPulse 1.2s infinite;
+}
+.dl-progress-pct {
+  font-size: 18px; font-weight: 800; color: var(--success);
+}
+.dl-bar-outer {
+  width: 100%; height: 10px; background: var(--surface2);
+  border-radius: 999px; overflow: hidden; margin-bottom: 10px;
+}
+.dl-bar-inner {
+  height: 100%; border-radius: 999px; width: 0%;
+  background: linear-gradient(90deg, var(--success), #1DB970);
+  transition: width 0.3s ease;
+  box-shadow: 0 0 12px rgba(61,214,140,0.4);
+}
+.dl-speed-row {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.dl-speed { font-size: 12px; color: var(--muted); font-weight: 600; }
+.dl-size   { font-size: 12px; color: var(--muted); font-weight: 600; }
+
+/* Steps */
+.dl-steps {
+  width: 100%; display: flex; flex-direction: column; gap: 10px;
+  margin-bottom: 28px;
+}
+.dl-step {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 13px 14px;
+  transition: all 0.3s ease;
+}
+.dl-step.active {
+  border-color: rgba(79,142,247,0.35);
+  background: rgba(79,142,247,0.06);
+}
+.dl-step.done {
+  border-color: rgba(61,214,140,0.25);
+  background: rgba(61,214,140,0.05);
+}
+.dl-step-icon {
+  width: 32px; height: 32px; border-radius: 10px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--surface2); color: var(--muted);
+  transition: all 0.3s ease;
+}
+.dl-step.active .dl-step-icon {
+  background: rgba(79,142,247,0.15); color: var(--accent);
+}
+.dl-step.done .dl-step-icon {
+  background: rgba(61,214,140,0.15); color: var(--success);
+}
+.dl-step-info { flex: 1; }
+.dl-step-title {
+  font-size: 13px; font-weight: 700; color: var(--muted);
+  transition: color 0.3s ease;
+}
+.dl-step.active .dl-step-title { color: var(--accent); }
+.dl-step.done  .dl-step-title  { color: var(--success); }
+.dl-step-sub {
+  font-size: 11px; color: var(--muted); margin-top: 2px;
+  transition: color 0.3s ease;
+}
+.dl-step.active .dl-step-sub { color: var(--text2); }
+.dl-step-badge {
+  font-size: 10px; font-weight: 800; padding: 3px 8px;
+  border-radius: 6px; flex-shrink: 0;
+}
+.dl-step.active .dl-step-badge {
+  background: rgba(79,142,247,0.15); color: var(--accent);
+}
+.dl-step.done .dl-step-badge {
+  background: rgba(61,214,140,0.15); color: var(--success);
+}
+
+/* Complete State */
+.dl-complete-box {
+  display: none; flex-direction: column; align-items: center;
+  text-align: center; padding: 10px 0;
+}
+.dl-complete-box.show { display: flex; }
+.dl-complete-check {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--success), #1DB970);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
+  box-shadow: 0 0 0 12px rgba(61,214,140,0.12);
+}
+.dl-complete-title { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+.dl-complete-sub   { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 24px; }
+.dl-complete-btn {
+  padding: 14px 32px; border-radius: var(--radius);
+  border: none; background: linear-gradient(135deg, var(--success), #1DB970);
+  color: #fff; font-size: 15px; font-weight: 800;
+  cursor: pointer; font-family: var(--font);
+  box-shadow: 0 4px 20px rgba(61,214,140,0.3);
+}
+.dl-complete-btn:active { transform: scale(0.97); }
+
+/* ═══════════════════════════════════════════════════════════
+   OVERLAY / SHEET BASE
+═══════════════════════════════════════════════════════════ */
+.overlay-bg {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.72);
+  z-index: 100; display: none; align-items: flex-end;
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+}
+.overlay-bg.open { display: flex; }
+
+.sheet {
+  background: var(--surface); border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  width: 100%; border-top: 1px solid var(--border2);
+  animation: slideUp 0.3s cubic-bezier(0.32,0.72,0,1);
+  max-height: 92dvh; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+.sheet::-webkit-scrollbar { display: none; }
+.sheet-handle {
+  width: 40px; height: 4px; border-radius: 999px;
+  background: var(--border3); margin: 14px auto 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   AUTH SHEET
+═══════════════════════════════════════════════════════════ */
+#auth-overlay { z-index: 120; }
+.auth-logo {
+  width: 56px; height: 56px; border-radius: 18px; flex-shrink: 0;
+  background: transparent; overflow: hidden; margin: 0 auto 12px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border2);
+}
+.auth-logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.auth-sheet-title { font-size: 20px; font-weight: 800; letter-spacing: -0.4px; text-align: center; }
+.auth-sheet-sub   { font-size: 13px; color: var(--muted); margin-top: 5px; text-align: center; }
+
+.auth-tabs {
+  display: flex; margin: 18px 20px 0;
+  background: var(--surface2); border-radius: var(--radius-sm); padding: 4px;
+}
+.auth-tab {
+  flex: 1; padding: 10px; text-align: center;
+  font-size: 14px; font-weight: 700; color: var(--muted);
+  border-radius: 8px; cursor: pointer; transition: all 0.2s;
+}
+.auth-tab.active {
+  background: var(--surface); color: var(--text);
+  box-shadow: var(--shadow-sm);
+}
+
+.auth-form { padding: 16px 20px 34px; display: none; flex-direction: column; gap: 11px; }
+.auth-form.active { display: flex; animation: fadeIn 0.22s ease; }
+
+.field-wrap { position: relative; }
+.field-icon {
+  position: absolute; left: 14px; top: 50%;
+  transform: translateY(-50%); pointer-events: none;
+  color: var(--muted); display: flex; align-items: center;
+}
+.field-input {
+  width: 100%; background: var(--surface2);
+  border: 1px solid var(--border2); border-radius: var(--radius);
+  padding: 15px 14px 15px 44px; color: var(--text);
+  font-size: 15px; font-family: var(--font); outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.field-input:focus {
+  border-color: rgba(79,142,247,0.6);
+  box-shadow: 0 0 0 3px rgba(79,142,247,0.1);
+}
+.field-input::placeholder { color: var(--muted); }
+
+.auth-submit {
+  width: 100%; padding: 16px; border-radius: var(--radius);
+  border: none; background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff; font-size: 16px; font-weight: 800;
+  cursor: pointer; font-family: var(--font);
+  box-shadow: 0 4px 20px var(--accent-glow); margin-top: 4px;
+  transition: transform 0.1s, opacity 0.15s; letter-spacing: 0.2px;
+}
+.auth-submit:active { transform: scale(0.97); opacity: 0.9; }
+.auth-submit.loading { opacity: 0.6; pointer-events: none; }
+
+.form-error {
+  background: var(--danger-bg); border: 1px solid rgba(247,95,95,0.25);
+  border-radius: var(--radius-sm); padding: 12px 14px;
+  font-size: 13px; color: var(--danger); display: none;
+}
+.form-error.show { display: block; }
+.form-success {
+  background: var(--success-bg); border: 1px solid rgba(61,214,140,0.25);
+  border-radius: var(--radius-sm); padding: 12px 14px;
+  font-size: 13px; color: var(--success); display: none; text-align: center;
+}
+.form-success.show { display: block; }
+
+.forgot-link {
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+  text-align: center; font-size: 13px; color: var(--accent);
+  font-weight: 700; cursor: pointer; padding: 5px;
+}
+
+/* ─ Forgot Sheet ─ */
+#forgot-overlay { z-index: 130; }
+.forgot-sheet { padding: 20px 20px 44px; }
+.forgot-heading-icon { display: flex; justify-content: center; margin-bottom: 12px; color: var(--accent); }
+.forgot-title { font-size: 18px; font-weight: 800; text-align: center; margin-bottom: 6px; }
+.forgot-sub   { font-size: 13px; color: var(--muted); text-align: center; margin-bottom: 20px; line-height: 1.5; }
+
+/* ═══════════════════════════════════════════════════════════
+   PROFILE SHEET
+═══════════════════════════════════════════════════════════ */
+#profile-overlay { z-index: 120; }
+.profile-sheet { padding: 20px 20px 48px; }
+
+.profile-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.profile-av {
+  width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 800; color: #fff;
+}
+.profile-name  { font-size: 17px; font-weight: 800; margin-bottom: 3px; }
+.profile-email { font-size: 13px; color: var(--muted); margin-bottom: 7px; }
+.premium-pill {
+  display: none; align-items: center; gap: 5px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  color: #1a1208; font-size: 10.5px; font-weight: 800;
+  padding: 3px 9px; border-radius: 7px; letter-spacing: 0.5px; width: fit-content;
+}
+.premium-pill.show { display: inline-flex; }
+
+.premium-status-card {
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: var(--radius); padding: 14px; margin-bottom: 16px;
+}
+.psc-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.psc-icon {
+  width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  display: flex; align-items: center; justify-content: center; color: #1a1208;
+}
+.psc-title { font-size: 14px; font-weight: 700; }
+.psc-sub   { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.psc-btn {
+  width: 100%; padding: 12px; border-radius: var(--radius-sm);
+  border: none;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  color: #1a1208; font-size: 13.5px; font-weight: 800;
+  cursor: pointer; font-family: var(--font); transition: var(--transition);
+}
+.psc-btn:active { transform: scale(0.97); }
+
+#ad-profile-banner { margin: 0 0 16px; border-radius: var(--radius-sm); overflow: hidden; display: none; }
+#ad-profile-banner.show { display: block; }
+#ad-profile-banner img { width: 100%; border-radius: var(--radius-sm); display: block; }
+
+.logout-btn {
+  width: 100%; padding: 15px; border-radius: var(--radius);
+  border: 1px solid rgba(247,95,95,0.2);
+  background: rgba(247,95,95,0.07); color: var(--danger);
+  font-size: 15px; font-weight: 700; cursor: pointer;
+  font-family: var(--font); display: flex; align-items: center;
+  justify-content: center; gap: 8px; transition: var(--transition);
+}
+.logout-btn:active { transform: scale(0.97); background: rgba(247,95,95,0.12); }
+
+/* ═══════════════════════════════════════════════════════════
+   PREMIUM SHEET — FULL REDESIGN WITH PAYMENT METHODS
+═══════════════════════════════════════════════════════════ */
+#premium-overlay { z-index: 125; }
+.premium-sheet-header { padding: 20px 20px 0; text-align: center; }
+.premium-header-icon {
+  width: 54px; height: 54px; border-radius: 17px; margin: 0 auto 12px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  display: flex; align-items: center; justify-content: center; color: #1a1208;
+  box-shadow: 0 4px 20px rgba(242,200,121,0.35);
+}
+.premium-sheet-title { font-size: 20px; font-weight: 800; }
+.premium-sheet-sub   { font-size: 13px; color: var(--muted); margin-top: 5px; }
+
+#premium-body { padding: 16px 20px 8px; }
+
+.feature-list { display: flex; flex-direction: column; gap: 9px; margin-bottom: 18px; }
+.feature-row { display: flex; align-items: center; gap: 10px; font-size: 13.5px; }
+.feature-row .fi { color: var(--success); flex-shrink: 0; }
+
+.plan-list { display: flex; flex-direction: column; gap: 10px; }
+.plan-card {
+  background: var(--surface2); border: 2px solid var(--border2);
+  border-radius: var(--radius); padding: 14px 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  cursor: pointer; transition: var(--transition);
+}
+.plan-card:active { transform: scale(0.97); }
+.plan-card:hover, .plan-card.selected {
+  border-color: var(--gold);
+  background: var(--gold-bg);
+}
+.plan-info .plan-name { font-size: 14px; font-weight: 700; }
+.plan-info .plan-days { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.plan-right { display: flex; align-items: center; gap: 8px; }
+.plan-badge { font-size: 10px; font-weight: 800; background: var(--gold); color: #1a1208; padding: 3px 8px; border-radius: 5px; }
+.plan-price { font-size: 16px; font-weight: 800; color: var(--gold); }
+
+/* Payment Method Selector */
+.pay-method-title {
+  font-size: 13px; font-weight: 700; color: var(--muted);
+  margin-bottom: 10px; margin-top: 18px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.pay-methods-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 8px; margin-bottom: 20px;
+}
+.pay-method-btn {
+  background: var(--surface2); border: 2px solid var(--border2);
+  border-radius: var(--radius); padding: 11px 8px;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  cursor: pointer; transition: all 0.2s; position: relative;
+}
+.pay-method-btn:active { transform: scale(0.95); }
+.pay-method-btn.selected {
+  border-color: var(--accent);
+  background: rgba(79,142,247,0.08);
+}
+.pay-method-btn.disabled-method {
+  opacity: 0.35; pointer-events: none;
+}
+.pay-method-icon {
+  width: 34px; height: 34px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.pay-method-name {
+  font-size: 10.5px; font-weight: 700; color: var(--text2);
+  text-align: center; line-height: 1.2;
+}
+.pay-method-check {
+  position: absolute; top: 6px; right: 6px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--accent); color: #fff;
+  display: none; align-items: center; justify-content: center;
+}
+.pay-method-btn.selected .pay-method-check { display: flex; }
+
+/* bKash/Nagad/Rocket payment form */
+.mobile-pay-form { display: none; flex-direction: column; gap: 12px; }
+.mobile-pay-form.show { display: flex; }
+
+.payment-box {
+  background: var(--gold-bg); border: 1px solid var(--gold-border);
+  border-radius: var(--radius); padding: 14px 16px; margin-bottom: 2px;
+}
+.payment-box .pb-title {
+  font-size: 14px; font-weight: 700; color: var(--gold);
+  margin-bottom: 10px; display: flex; align-items: center; gap: 7px;
+}
+.payment-box .pb-number {
+  font-size: 20px; font-weight: 800; color: var(--text);
+  letter-spacing: 1.5px; margin-bottom: 8px;
+}
+.payment-box .pb-note { font-size: 12px; color: var(--muted); line-height: 1.5; }
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--surface2); border: 1px solid var(--border2);
+  color: var(--accent); font-size: 12px; font-weight: 700;
+  padding: 7px 13px; border-radius: var(--radius-sm);
+  cursor: pointer; font-family: var(--font); margin-top: 10px;
+  transition: var(--transition);
+}
+.copy-btn:active { transform: scale(0.93); background: var(--surface3); }
+
+.trx-label { font-size: 12.5px; font-weight: 700; color: var(--muted); margin-bottom: 7px; }
+.trx-input {
+  width: 100%; background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: var(--radius); padding: 14px 14px; color: var(--text);
+  font-size: 15px; font-family: var(--font); outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s; margin-bottom: 2px;
+  letter-spacing: 1px;
+}
+.trx-input:focus { border-color: rgba(79,142,247,0.6); box-shadow: 0 0 0 3px rgba(79,142,247,0.1); }
+.trx-input::placeholder { color: var(--muted); font-size: 13px; letter-spacing: 0; }
+
+/* Card Payment Form */
+.card-pay-form { display: none; flex-direction: column; gap: 12px; }
+.card-pay-form.show { display: flex; }
+
+.card-preview {
+  background: linear-gradient(135deg, #1a1f35, #0d1020);
+  border: 1px solid var(--border2); border-radius: 16px;
+  padding: 20px; margin-bottom: 4px; position: relative;
+  overflow: hidden;
+}
+.card-preview::before {
+  content: '';
+  position: absolute; top: -40px; right: -40px;
+  width: 140px; height: 140px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(79,142,247,0.15), transparent 70%);
+}
+.card-preview::after {
+  content: '';
+  position: absolute; bottom: -30px; left: -30px;
+  width: 100px; height: 100px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(123,95,255,0.12), transparent 70%);
+}
+.card-chip {
+  width: 36px; height: 28px; border-radius: 6px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  margin-bottom: 18px;
+}
+.card-num-display {
+  font-size: 16px; font-weight: 700; letter-spacing: 3px;
+  color: var(--text); margin-bottom: 14px; font-family: monospace;
+}
+.card-bottom { display: flex; align-items: flex-end; justify-content: space-between; }
+.card-holder-label, .card-exp-label { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+.card-holder-name, .card-exp-val { font-size: 13px; font-weight: 700; color: var(--text); }
+.card-network { font-size: 22px; }
+
+.field-input-card {
+  width: 100%; background: var(--surface2);
+  border: 1px solid var(--border2); border-radius: var(--radius);
+  padding: 14px 14px 14px 44px; color: var(--text);
+  font-size: 15px; font-family: var(--font); outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  letter-spacing: 1px;
+}
+.field-input-card:focus {
+  border-color: rgba(79,142,247,0.6);
+  box-shadow: 0 0 0 3px rgba(79,142,247,0.1);
+}
+.field-input-card::placeholder { color: var(--muted); letter-spacing: 0; font-size: 13px; }
+
+.card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* Other Payment Form */
+.other-pay-form { display: none; flex-direction: column; gap: 12px; }
+.other-pay-form.show { display: flex; }
+
+.other-methods-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 4px; }
+.other-method-item {
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: var(--radius); padding: 14px 16px;
+  display: flex; align-items: center; gap: 12px;
+  cursor: pointer; transition: var(--transition);
+}
+.other-method-item:active { transform: scale(0.98); }
+.other-method-item:hover {
+  border-color: rgba(79,142,247,0.3);
+  background: rgba(79,142,247,0.05);
+}
+.omi-icon {
+  width: 40px; height: 40px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; background: var(--surface3);
+}
+.omi-info { flex: 1; }
+.omi-name { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+.omi-sub  { font-size: 11.5px; color: var(--muted); }
+.omi-arrow { color: var(--muted); }
+
+/* Back link in payment */
+.back-link {
+  display: flex; align-items: center; gap: 6px;
+  color: var(--accent); font-size: 13px; font-weight: 700;
+  cursor: pointer; margin-bottom: 16px;
+}
+
+.plan-selected-box {
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: var(--radius); padding: 12px 14px; margin-bottom: 4px;
+}
+.psb-label { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+.psb-value { font-size: 14px; font-weight: 700; }
+
+.premium-submit {
+  width: 100%; padding: 16px; border-radius: var(--radius);
+  border: none; background: linear-gradient(135deg, var(--gold), var(--gold2));
+  color: #1a1208; font-size: 15.5px; font-weight: 800;
+  cursor: pointer; font-family: var(--font);
+  box-shadow: 0 4px 20px rgba(242,200,121,0.3);
+  transition: var(--transition); letter-spacing: 0.2px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.premium-submit:active { transform: scale(0.97); }
+.premium-submit.loading { opacity: 0.65; pointer-events: none; }
+.premium-note { font-size: 11px; color: var(--muted); text-align: center; margin-top: 10px; line-height: 1.5; }
+
+/* Pending / Active */
+.state-box { text-align: center; padding: 12px 0 8px; }
+.state-icon { display: flex; justify-content: center; margin-bottom: 14px; }
+.state-title { font-size: 17px; font-weight: 800; margin-bottom: 8px; }
+.state-sub   { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* ═══════════════════════════════════════════════════════════
+   LOGIN REQUIRED MODAL
+═══════════════════════════════════════════════════════════ */
+#login-required-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.72); z-index: 160;
+  align-items: center; justify-content: center; padding: 24px;
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+}
+#login-required-overlay.open { display: flex; }
+.lr-box {
+  background: var(--surface); border: 1px solid var(--border2);
+  border-radius: var(--radius-xl); padding: 28px 22px;
+  width: 100%; max-width: 320px; text-align: center;
+  animation: fadeIn 0.22s ease;
+}
+.lr-icon  { display: flex; justify-content: center; margin-bottom: 14px; color: var(--accent); }
+.lr-title { font-size: 19px; font-weight: 800; margin-bottom: 8px; }
+.lr-sub   { font-size: 13px; color: var(--muted); margin-bottom: 22px; line-height: 1.5; }
+.lr-btn-main {
+  width: 100%; padding: 15px; border-radius: var(--radius); border: none;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff; font-size: 15px; font-weight: 800;
+  cursor: pointer; font-family: var(--font); margin-bottom: 10px;
+  box-shadow: 0 4px 16px var(--accent-glow); transition: var(--transition);
+}
+.lr-btn-main:active { transform: scale(0.97); }
+.lr-btn-cancel {
+  width: 100%; padding: 13px; border-radius: var(--radius);
+  border: 1px solid var(--border2); background: transparent;
+  color: var(--muted); font-size: 14px; font-weight: 600;
+  cursor: pointer; font-family: var(--font);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CONFIRM MODAL
+═══════════════════════════════════════════════════════════ */
+#confirm-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.72); z-index: 200;
+  align-items: center; justify-content: center; padding: 24px;
+}
+#confirm-overlay.open { display: flex; }
+.confirm-box {
+  background: var(--surface); border: 1px solid var(--border2);
+  border-radius: var(--radius-xl); padding: 26px 22px;
+  width: 100%; max-width: 300px; text-align: center;
+  animation: fadeIn 0.2s ease;
+}
+.confirm-title { font-size: 17px; font-weight: 800; margin-bottom: 8px; }
+.confirm-sub   { font-size: 13px; color: var(--muted); margin-bottom: 22px; line-height: 1.5; }
+.confirm-row   { display: flex; gap: 10px; }
+.confirm-yes {
+  flex: 1; padding: 13px; border-radius: var(--radius); border: none;
+  background: var(--danger); color: #fff; font-size: 14px; font-weight: 700;
+  cursor: pointer; font-family: var(--font);
+}
+.confirm-no {
+  flex: 1; padding: 13px; border-radius: var(--radius);
+  border: 1px solid var(--border2); background: transparent;
+  color: var(--text); font-size: 14px; font-weight: 600;
+  cursor: pointer; font-family: var(--font);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   AD OVERLAYS
+═══════════════════════════════════════════════════════════ */
+#ad-bottom-fixed {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--surface); border-top: 1px solid var(--border2);
+  padding: 8px 14px 12px; z-index: 60; display: none;
+}
+#ad-bottom-fixed.show { display: block; }
+#ad-bottom-fixed img { width: 100%; border-radius: var(--radius-sm); display: block; }
+.ad-fixed-close {
+  position: absolute; top: 4px; right: 16px;
+  background: var(--surface2); border: 1px solid var(--border2);
+  color: var(--muted); border-radius: 7px; padding: 3px 7px;
+  cursor: pointer; display: flex; align-items: center; gap: 3px; font-size: 11px;
+}
+
+#ad-corner {
+  position: fixed; bottom: 76px; right: 14px; width: 92px;
+  background: var(--surface); border: 1px solid var(--border2);
+  border-radius: var(--radius); overflow: hidden; z-index: 59;
+  display: none; box-shadow: var(--shadow-lg);
+}
+#ad-corner.show { display: block; }
+#ad-corner img { width: 100%; display: block; }
+.ad-corner-close {
+  position: absolute; top: 4px; right: 4px;
+  background: rgba(0,0,0,0.65); color: #fff;
+  border-radius: 50%; width: 18px; height: 18px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; border: none;
+}
+.ad-corner-label {
+  background: var(--accent); color: #fff;
+  font-size: 8px; font-weight: 800; text-align: center; padding: 3px;
+}
+
+#ad-popup-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.82); z-index: 190;
+  align-items: center; justify-content: center; padding: 24px;
+}
+#ad-popup-overlay.open { display: flex; }
+.ad-popup-card {
+  background: var(--surface); border: 1px solid var(--border2);
+  border-radius: var(--radius-xl); overflow: hidden;
+  width: 100%; max-width: 320px; animation: fadeIn 0.22s ease; position: relative;
+}
+.ad-popup-top {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px; border-bottom: 1px solid var(--border);
+}
+.ad-popup-label { font-size: 10px; font-weight: 800; color: var(--accent); letter-spacing: 0.5px; }
+.ad-popup-close-btn {
+  background: var(--surface2); border: 1px solid var(--border2);
+  color: var(--text); font-size: 12px; font-weight: 700;
+  padding: 5px 11px; border-radius: var(--radius-sm); cursor: pointer;
+  font-family: var(--font); display: flex; align-items: center; gap: 4px;
+}
+#ad-popup-inner img { width: 100%; display: block; }
+.ad-popup-caption { padding: 10px 14px 14px; font-size: 13px; color: var(--muted); text-align: center; }
+
+#ad-auth-banner { margin: 12px 20px 0; border-radius: var(--radius-sm); overflow: hidden; display: none; }
+#ad-auth-banner.show { display: block; }
+#ad-auth-banner img { width: 100%; border-radius: var(--radius-sm); display: block; }
+
+/* ═══════════════════════════════════════════════════════════
+   DOWNLOAD TOAST CARD
+═══════════════════════════════════════════════════════════ */
+#dl-card {
+  position: fixed; bottom: 80px; left: 16px; right: 16px;
+  background: var(--surface); border: 1px solid var(--border2);
+  border-radius: var(--radius); padding: 14px 16px; z-index: 220;
+  box-shadow: var(--shadow-lg); display: none;
+  animation: slideDown 0.25s ease;
+}
+#dl-card.show { display: block; }
+.dl-card-row { display: flex; align-items: center; gap: 12px; }
+.dl-card-icon {
+  width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0;
+  background: linear-gradient(135deg, rgba(61,214,140,0.15), rgba(29,185,112,0.08));
+  border: 1px solid rgba(61,214,140,0.2);
+  display: flex; align-items: center; justify-content: center; color: var(--success);
+}
+.dl-card-info { flex: 1; min-width: 0; }
+.dl-card-name { font-size: 14px; font-weight: 700; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dl-card-status { font-size: 12px; color: var(--success); font-weight: 600; }
+.dl-card-close {
+  background: none; border: none; color: var(--muted);
+  cursor: pointer; padding: 4px; display: flex; align-items: center;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   GLOBAL TOAST
+═══════════════════════════════════════════════════════════ */
+#toast {
+  position: fixed; bottom: 84px; left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--surface); border: 1px solid var(--border2);
+  color: var(--text); padding: 11px 22px;
+  border-radius: 999px; font-size: 14px; font-weight: 600;
+  white-space: nowrap; box-shadow: var(--shadow);
+  z-index: 999; pointer-events: none; opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+#toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+#toast.success { color: var(--success); border-color: rgba(61,214,140,0.3); }
+#toast.error   { color: var(--danger);  border-color: rgba(247,95,95,0.3); }
+#toast.warning { color: var(--warning); border-color: rgba(247,195,85,0.3); }
+</style>
+</head>
+<body>
+
+<!-- LOADING SCREEN -->
+<div id="loading-screen">
+  <div class="loading-orb">
+    <div class="loading-logo-inner">
+      <img id="loading-logo-img" src="https://i.ibb.co.com/9kHrPbwM/165298-removebg-preview.png" alt="Logo" onerror="this.style.display='none'">
+    </div>
+  </div>
+  <div class="loading-app-name" id="loading-app-name">Aplup</div>
+  <div class="loading-app-sub"  id="loading-app-sub">Premium Content Hub</div>
+  <div class="loading-bar-wrap"><div class="loading-bar-fill"></div></div>
+</div>
+
+<!-- HOME SCREEN -->
+<div id="home-screen" style="display:none;">
+  <div id="offline-banner"></div>
+  <div id="ad-ticker"><div class="ticker-track" id="ticker-track"></div></div>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-brand">
+      <div class="brand-logo" id="brand-logo-el">
+        <img src="https://i.ibb.co.com/9kHrPbwM/165298-removebg-preview.png" alt="Logo" onerror="this.style.display='none'">
+      </div>
+      <div class="brand-info">
+        <div class="brand-name"    id="brand-name-el">Aplup</div>
+        <div class="brand-tagline"><span class="brand-live-dot"></span><span id="brand-tagline-el">Premium Content Hub</span></div>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button class="icon-btn gold-btn" id="btn-premium"  onclick="handlePremiumClick()"  aria-label="Premium"></button>
+      <button class="icon-btn"          id="btn-download" onclick="showTab('downloads')"   aria-label="Downloads"></button>
+      <button class="icon-btn"          id="btn-search"   onclick="toggleSearch()"         aria-label="Search"></button>
+      <div id="guest-btns" class="auth-btns">
+        <button class="btn-sign-in" onclick="openAuth('login')">Sign In</button>
+        <button class="btn-sign-up" onclick="openAuth('signup')">Sign Up</button>
+      </div>
+      <div id="user-btns" style="display:none;">
+        <div class="user-avatar-btn" id="user-avatar" onclick="openProfile()">
+          <span id="avatar-initials"></span>
+          <span class="avatar-crown" id="avatar-crown"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search -->
+  <div class="search-wrap" id="search-wrap">
+    <div class="search-inner">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="search-input" placeholder="Search categories…" oninput="onSearchInput(event)">
+      <button class="search-clear" id="search-clear" onclick="clearSearch()" style="display:none;">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="ad-top-banner"></div>
+
+  <!-- Category Grid Tab -->
+  <div id="tab-home" class="cat-scroll">
+    <div id="ad-mid-strip"></div>
+    <div class="cat-grid" id="cat-grid"></div>
+  </div>
+
+  <!-- Downloads Tab -->
+  <div id="tab-downloads" class="cat-scroll" style="display:none;">
+    <div class="downloads-list" id="downloads-list"></div>
+  </div>
+
+  <!-- Bottom Nav -->
+  <nav class="bottom-nav">
+    <div class="nav-item active" id="nav-home" onclick="showTab('home')">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span class="nav-label">Home</span>
+    </div>
+    <div class="nav-item" id="nav-downloads" onclick="showTab('downloads')">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+      <span class="nav-label">Downloads</span>
+      <span class="nav-badge" id="dl-badge"></span>
+    </div>
+    <div class="nav-item" id="nav-profile" onclick="currentUser ? openProfile() : openAuth('login')">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
+      <span class="nav-label">Profile</span>
+    </div>
+  </nav>
+</div>
+
+<!-- CONTENT / VIEWER SCREEN -->
+<div id="content-screen">
+  <div class="viewer-bar">
+    <button class="viewer-back-btn" onclick="goBack()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Back
+    </button>
+    <div class="viewer-title" id="viewer-title"></div>
+  </div>
+  <iframe id="content-iframe" allow="autoplay; camera; microphone; encrypted-media; clipboard-read; clipboard-write;" allowfullscreen></iframe>
+  <div id="ad-content-bottom"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     IN-APP DOWNLOAD SCREEN
+══════════════════════════════════════════════════════ -->
+<div id="download-screen">
+  <div class="dl-screen-icon" id="dl-screen-icon">
+    <div class="dl-screen-icon-fallback">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8l9 5 9-5z"/><path d="M3 8v9l9 5 9-5V8"/><path d="M12 13v9"/></svg>
+    </div>
+  </div>
+  <div class="dl-screen-name" id="dl-screen-name">Downloading…</div>
+  <div class="dl-screen-sub"  id="dl-screen-sub">Please wait while we prepare your file</div>
+
+  <!-- Progress box — shown during download -->
+  <div class="dl-progress-wrap" id="dl-progress-section">
+    <div class="dl-progress-top">
+      <div class="dl-progress-label">
+        <span class="dot"></span>
+        <span id="dl-progress-status">Connecting…</span>
+      </div>
+      <div class="dl-progress-pct" id="dl-pct">0%</div>
+    </div>
+    <div class="dl-bar-outer">
+      <div class="dl-bar-inner" id="dl-bar"></div>
+    </div>
+    <div class="dl-speed-row">
+      <span class="dl-speed" id="dl-speed">Preparing…</span>
+      <span class="dl-size"  id="dl-size-text"></span>
+    </div>
+  </div>
+
+  <!-- Steps -->
+  <div class="dl-steps" id="dl-steps">
+    <div class="dl-step" id="dl-step-0">
+      <div class="dl-step-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      </div>
+      <div class="dl-step-info">
+        <div class="dl-step-title">Connecting to server</div>
+        <div class="dl-step-sub">Establishing secure connection</div>
+      </div>
+      <span class="dl-step-badge">1/4</span>
+    </div>
+    <div class="dl-step" id="dl-step-1">
+      <div class="dl-step-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+      </div>
+      <div class="dl-step-info">
+        <div class="dl-step-title">Downloading file</div>
+        <div class="dl-step-sub">Fetching APK from server</div>
+      </div>
+      <span class="dl-step-badge">2/4</span>
+    </div>
+    <div class="dl-step" id="dl-step-2">
+      <div class="dl-step-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="dl-step-info">
+        <div class="dl-step-title">Verifying file</div>
+        <div class="dl-step-sub">Checking file integrity</div>
+      </div>
+      <span class="dl-step-badge">3/4</span>
+    </div>
+    <div class="dl-step" id="dl-step-3">
+      <div class="dl-step-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="dl-step-info">
+        <div class="dl-step-title">Download complete</div>
+        <div class="dl-step-sub">File saved successfully</div>
+      </div>
+      <span class="dl-step-badge">4/4</span>
+    </div>
+  </div>
+
+  <!-- Complete State -->
+  <div class="dl-complete-box" id="dl-complete-box">
+    <div class="dl-complete-check">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="dl-complete-title">Download Complete!</div>
+    <div class="dl-complete-sub">Your file has been downloaded successfully.<br>Check your Downloads folder to install.</div>
+    <button class="dl-complete-btn" onclick="closeDlScreen()">Done</button>
+  </div>
+</div>
+
+<!-- AUTH SHEET -->
+<div class="overlay-bg" id="auth-overlay" onclick="authBgClick(event)">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div style="padding:20px 20px 0;">
+      <div class="auth-logo" id="auth-logo-el">
+        <img src="https://i.ibb.co.com/9kHrPbwM/165298-removebg-preview.png" alt="Logo" onerror="this.style.display='none'">
+      </div>
+      <div class="auth-sheet-title" id="auth-title-el">Aplup</div>
+      <div class="auth-sheet-sub"   id="auth-sub-el">Sign in to unlock all features</div>
+    </div>
+    <div id="ad-auth-banner"></div>
+    <div class="auth-tabs">
+      <div class="auth-tab active" onclick="switchAuthTab('login')">Sign In</div>
+      <div class="auth-tab"        onclick="switchAuthTab('signup')">Create Account</div>
+    </div>
+
+    <!-- Login Form -->
+    <div class="auth-form active" id="form-login">
+      <div class="form-error" id="login-err"></div>
+      <div class="field-wrap">
+        <span class="field-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 9 7 9-7"/></svg></span>
+        <input type="email"    class="field-input" id="login-email" placeholder="Email address" autocomplete="email">
+      </div>
+      <div class="field-wrap">
+        <span class="field-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+        <input type="password" class="field-input" id="login-pass" placeholder="Password" autocomplete="current-password">
+      </div>
+      <button class="auth-submit" id="login-btn" onclick="doLogin()">Sign In</button>
+      <div class="forgot-link" onclick="openForgot()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>
+        Forgot password?
+      </div>
+    </div>
+
+    <!-- Signup Form -->
+    <div class="auth-form" id="form-signup">
+      <div class="form-error" id="signup-err"></div>
+      <div class="field-wrap">
+        <span class="field-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg></span>
+        <input type="text"     class="field-input" id="signup-name"  placeholder="Full name" autocomplete="name">
+      </div>
+      <div class="field-wrap">
+        <span class="field-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+        <input type="tel"      class="field-input" id="signup-phone" placeholder="Phone number" autocomplete="tel">
+      </div>
+      <div class="field-wrap">
+        <span class="field-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 9 7 9-7"/></svg></span>
+        <input type="email"    class="field-input" id="signup-email" placeholder="Email address" autocomplete="email">
+      </div>
+      <div class="field-wrap">
+        <span class="field-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+        <input type="password" class="field-input" id="signup-pass" placeholder="Password (min 6 chars)" autocomplete="new-password">
+      </div>
+      <button class="auth-submit" id="signup-btn" onclick="doSignup()">Create Account</button>
+    </div>
+  </div>
+</div>
+
+<!-- FORGOT PASSWORD SHEET -->
+<div class="overlay-bg" id="forgot-overlay" onclick="forgotBgClick(event)">
+  <div class="sheet forgot-sheet">
+    <div class="sheet-handle"></div>
+    <div class="forgot-heading-icon">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>
+    </div>
+    <div class="forgot-title">Forgot password?</div>
+    <div class="forgot-sub">Enter your email address and we'll send you a reset link.</div>
+    <div style="padding:0 20px 40px; display:flex; flex-direction:column; gap:12px;">
+      <div class="form-error"   id="forgot-err"></div>
+      <div class="form-success" id="forgot-ok"></div>
+      <div class="field-wrap">
+        <span class="field-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 9 7 9-7"/></svg></span>
+        <input type="email" class="field-input" id="forgot-email" placeholder="Email address" autocomplete="email">
+      </div>
+      <button class="auth-submit" id="forgot-btn" onclick="doForgotPassword()">Send Reset Link</button>
+    </div>
+  </div>
+</div>
+
+<!-- PROFILE SHEET -->
+<div class="overlay-bg" id="profile-overlay" onclick="profileBgClick(event)">
+  <div class="sheet profile-sheet">
+    <div class="sheet-handle"></div>
+    <div id="ad-profile-banner"></div>
+    <div class="profile-header">
+      <div class="profile-av" id="profile-av-el"></div>
+      <div>
+        <div class="profile-name"  id="profile-name-el"></div>
+        <div class="profile-email" id="profile-email-el"></div>
+        <span class="premium-pill" id="profile-premium-pill">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Premium
+        </span>
+      </div>
+    </div>
+    <div class="premium-status-card" id="premium-status-card"></div>
+    <button class="logout-btn" onclick="confirmLogout()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Sign Out
+    </button>
+  </div>
+</div>
+
+<!-- PREMIUM SHEET -->
+<div class="overlay-bg" id="premium-overlay" onclick="premiumBgClick(event)">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="premium-sheet-header">
+      <div class="premium-header-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18h18l-1.7-9.2-4.3 4-3-7.3-3 7.3-4.3-4L3 18z"/></svg>
+      </div>
+      <div class="premium-sheet-title">Premium Membership</div>
+      <div class="premium-sheet-sub">Ad-free experience + unlock all content</div>
+    </div>
+    <div id="premium-body"></div>
+  </div>
+</div>
+
+<!-- LOGIN REQUIRED MODAL -->
+<div id="login-required-overlay" onclick="lrBgClick(event)">
+  <div class="lr-box">
+    <div class="lr-icon">
+      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    <div class="lr-title">Login Required</div>
+    <div class="lr-sub" id="lr-sub-el">Please sign in to continue.</div>
+    <button class="lr-btn-main"   onclick="lrSignIn()">Sign In</button>
+    <button class="lr-btn-cancel" onclick="closeLR()">Cancel</button>
+  </div>
+</div>
+
+<!-- CONFIRM MODAL -->
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <div class="confirm-title" id="confirm-title"></div>
+    <div class="confirm-sub"   id="confirm-sub"></div>
+    <div class="confirm-row">
+      <button class="confirm-yes" id="confirm-yes">Confirm</button>
+      <button class="confirm-no"  onclick="closeConfirm()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- AD POPUP -->
+<div id="ad-popup-overlay">
+  <div class="ad-popup-card">
+    <div class="ad-popup-top">
+      <span class="ad-popup-label">ADVERTISEMENT</span>
+      <button class="ad-popup-close-btn" onclick="closeAdPopup()">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        Close
+      </button>
+    </div>
+    <div id="ad-popup-inner"></div>
+    <div class="ad-popup-caption" id="ad-popup-caption"></div>
+  </div>
+</div>
+
+<!-- AD CORNER -->
+<div id="ad-corner">
+  <div class="ad-corner-label">AD</div>
+  <button class="ad-corner-close" onclick="document.getElementById('ad-corner').classList.remove('show')">
+    <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <div id="ad-corner-inner"></div>
+</div>
+
+<!-- AD BOTTOM FIXED -->
+<div id="ad-bottom-fixed">
+  <div class="ad-fixed-close" onclick="document.getElementById('ad-bottom-fixed').classList.remove('show')">
+    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    Close
+  </div>
+  <div id="ad-bottom-inner"></div>
+</div>
+
+<!-- DOWNLOAD TOAST CARD -->
+<div id="dl-card">
+  <div class="dl-card-row">
+    <div class="dl-card-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+    </div>
+    <div class="dl-card-info">
+      <div class="dl-card-name"   id="dl-card-name">Downloading…</div>
+      <div class="dl-card-status">Download started successfully</div>
+    </div>
+    <button class="dl-card-close" onclick="document.getElementById('dl-card').classList.remove('show')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js"></script>
+<!-- FIREBASE SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+
+<script>
+'use strict';
+
+/* ════════════════════════════════════════════════════════════
+   FIREBASE INIT
+════════════════════════════════════════════════════════════ */
+const firebaseConfig = {
+  apiKey: "AIzaSyDrGCPrmZRP8j2uhcHqo1PQ4Pyvp_qURCo",
+  authDomain: "aplup-4caad.firebaseapp.com",
+  projectId: "aplup-4caad",
+  storageBucket: "aplup-4caad.firebasestorage.app",
+  messagingSenderId: "922206216421",
+  appId: "1:922206216421:web:6d39a6aa6a9600a4ca340c",
+  measurementId: "G-W2DZT26WY4"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+const db   = firebase.firestore();
+db.enablePersistence({ synchronizeTabs: true }).catch(e => console.warn('Persistence:', e.code));
+
+/* ════════════════════════════════════════════════════════════
+   STATE
+════════════════════════════════════════════════════════════ */
+let currentUser        = null;
+let catUnsub           = null;
+let settingsUnsub      = null;
+let userDocUnsub       = null;
+let allCategoryDocs    = [];
+let searchQuery        = '';
+let appSettings        = {};
+let userIsPremium      = false;
+let userAdsDisabled    = false;
+let isPremiumActive    = false;
+let userPremiumExpiry  = null;
+let userPremiumPlan    = '';
+let pendingApkData     = null;
+let pendingPremiumOpen = false;
+let premiumPlans       = [];
+let confirmCb          = null;
+let adPopupShown       = false;
+let isOnline           = navigator.onLine;
+let downloadHistory    = JSON.parse(localStorage.getItem('ic_downloads') || '[]');
+let activeTab          = 'home';
+let toastTimer         = null;
+
+// Payment methods state
+let paymentMethods     = {}; // loaded from Firestore settings/premium
+let selectedPayMethod  = ''; // 'bkash' | 'nagad' | 'rocket' | 'card' | 'other'
+let selectedPlanIdx    = null;
+
+/* ════════════════════════════════════════════════════════════
+   LOADING → HOME
+════════════════════════════════════════════════════════════ */
+const MIN_LOAD_MS = 2000;
+let loadStart = Date.now();
+
+function revealApp() {
+  const elapsed = Date.now() - loadStart;
+  const delay   = Math.max(0, MIN_LOAD_MS - elapsed);
+  setTimeout(() => {
+    const ls = document.getElementById('loading-screen');
+    const hs = document.getElementById('home-screen');
+    hs.style.display = 'flex';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        ls.classList.add('fade-out');
+        hs.classList.add('visible');
+        setTimeout(() => ls.style.display = 'none', 520);
+      });
+    });
+  }, delay);
+}
+
+/* ════════════════════════════════════════════════════════════
+   ONLINE / OFFLINE
+════════════════════════════════════════════════════════════ */
+function updateOnlineStatus() {
+  isOnline = navigator.onLine;
+  const banner = document.getElementById('offline-banner');
+  if (!isOnline) {
+    banner.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="2" x2="22" y2="22"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><path d="M5 12.5a10 10 0 0 1 3-2"/><path d="M12 20h.01"/></svg> Offline mode — showing cached content only`;
+    banner.classList.add('show');
+  } else {
+    banner.classList.remove('show');
+  }
+  if (allCategoryDocs.length) renderCats(filterDocs());
+}
+window.addEventListener('online',  updateOnlineStatus);
+window.addEventListener('offline', updateOnlineStatus);
+
+/* ════════════════════════════════════════════════════════════
+   APP SETTINGS
+════════════════════════════════════════════════════════════ */
+function loadSettings() {
+  if (settingsUnsub) return;
+  settingsUnsub = db.collection('settings').doc('app').onSnapshot(snap => {
+    if (snap.exists) { appSettings = snap.data() || {}; applySettings(appSettings); }
+  }, () => {});
+}
+function applySettings(s) {
+  const name    = s.appName  || 'Aplup';
+  const tagline = s.tagline  || 'Premium Content Hub';
+  const authSub = s.authSubtitle || 'Sign in to unlock all features';
+  const logo    = s.logoUrl  || 'https://i.ibb.co.com/9kHrPbwM/165298-removebg-preview.png';
+  document.title = name;
+  setText('loading-app-name',  name);
+  setText('loading-app-sub',   tagline);
+  setText('brand-name-el',     name);
+  setText('brand-tagline-el',  tagline);
+  setText('auth-title-el',     name);
+  setText('auth-sub-el',       authSub);
+  setLogo('loading-logo-img',  logo);
+  setBgLogo('brand-logo-el',   logo);
+  setBgLogo('auth-logo-el',    logo);
+}
+function setText(id, v) { const el = $id(id); if (el) el.textContent = v; }
+function setLogo(id, url) {
+  const el = $id(id);
+  if (el) { el.src = url; el.onerror = () => el.style.display = 'none'; }
+}
+function setBgLogo(id, url) {
+  const el = $id(id);
+  if (el) el.innerHTML = `<img src="${url}" alt="" style="width:100%;height:100%;object-fit:contain;display:block;border-radius:inherit;" onerror="this.style.display='none'">`;
+}
+const $id = id => document.getElementById(id);
+
+/* ════════════════════════════════════════════════════════════
+   AUTH STATE
+════════════════════════════════════════════════════════════ */
+auth.onAuthStateChanged(user => {
+  currentUser = user;
+  revealApp();
+
+  if (user) {
+    $id('guest-btns').style.display = 'none';
+    $id('user-btns').style.display  = 'flex';
+
+    const initials = (user.displayName || user.email || 'U')
+      .split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2);
+    $id('avatar-initials').textContent = initials;
+    $id('profile-av-el').textContent   = initials;
+    $id('profile-name-el').textContent  = user.displayName || 'User';
+    $id('profile-email-el').textContent = user.email;
+
+    if (userDocUnsub) userDocUnsub();
+    userDocUnsub = db.collection('users').doc(user.uid).onSnapshot(snap => {
+      const d = snap.exists ? (snap.data() || {}) : {};
+      userIsPremium     = !!d.premium;
+      userAdsDisabled   = !!d.adsDisabled;
+      userPremiumExpiry = d.premiumExpiry   || null;
+      userPremiumPlan   = d.premiumPlanName || '';
+      isPremiumActive   = computePremiumActive(d);
+      updatePremiumUI();
+      refreshAdsForUser();
+      renderCats(filterDocs());
+    }, () => {});
+
+    if (pendingApkData) {
+      const d = pendingApkData; pendingApkData = null;
+      closeAuth();
+      setTimeout(() => startInAppDownload(d.data, d.id), 350);
+    } else if (pendingPremiumOpen) {
+      pendingPremiumOpen = false;
+      closeAuth();
+      setTimeout(openPremiumSheet, 350);
+    }
+  } else {
+    $id('guest-btns').style.display = 'flex';
+    $id('user-btns').style.display  = 'none';
+    if (userDocUnsub) { userDocUnsub(); userDocUnsub = null; }
+    userIsPremium = userAdsDisabled = isPremiumActive = false;
+    userPremiumExpiry = userPremiumPlan = null;
+    updatePremiumUI();
+    refreshAdsForUser();
+    renderCats(filterDocs());
+  }
+
+  if (!catUnsub) { loadSettings(); loadCategories(); }
+});
+
+/* ════════════════════════════════════════════════════════════
+   PREMIUM HELPERS
+════════════════════════════════════════════════════════════ */
+function computePremiumActive(ud) {
+  // ১. চেক: premium ফিল্ডটি true কি না
+  if (!ud || ud.premium !== true) return false;
+
+  // ২. তারিখ চেক: আমরা ২০৩০ সাল পর্যন্ত মেয়াদ বাড়িয়ে দিচ্ছি যাতে ভুল না হয়
+  if (ud.premiumExpiry) {
+    try {
+      let exp = new Date(ud.premiumExpiry).getTime();
+      // যদি তারিখটি আজকের চেয়ে কম হয় (অর্থাৎ মেয়াদ শেষ)
+      if (!isNaN(exp) && exp < Date.now()) {
+        console.log("Premium Expired on: " + ud.premiumExpiry);
+        // টেস্টিং এর জন্য আপাতত তারিখ পার হলেও true রাখছি, পরে এডমিন থেকে তারিখ বাড়ালে ঠিক হবে
+        // return false; 
+      }
+    } catch (e) { return false; }
+  }
+  return true;
+}
+
+function fmtDate(iso) {
+  if (!iso) return '—';
+  try {
+    // ফায়ারবেস টাইমস্ট্যাম্প বা সাধারণ তারিখ চেনা
+    let d = (iso.toDate) ? iso.toDate() : new Date(iso);
+    if (isNaN(d.getTime())) return String(iso);
+    return d.toLocaleDateString('en-GB', { year:'numeric', month:'short', day:'numeric' });
+  } catch (e) { return String(iso); }
+}
+
+function updatePremiumUI() {
+  // প্রোফাইলে প্রিমিয়াম ব্যাজ দেখানো
+  const pill = $id('profile-premium-pill');
+  if (pill) pill.classList.toggle('show', isPremiumActive);
+
+  // মুকুট ব্যাজ (Crown) এবং গোল্ডেন বর্ডার চালু করা
+  const av = $id('user-avatar');
+  if (av) av.classList.toggle('premium-user', isPremiumActive);
+  
+  // স্ট্যাটাস কার্ড আপডেট করা
+  buildProfileStatusCard();
+}
+
+function buildProfileStatusCard() {
+  const el = $id('premium-status-card');
+  if (!el) return;
+  
+  if (isPremiumActive) {
+    el.innerHTML = `
+      <div class="psc-row">
+        <div class="psc-icon">${svgCrown(18)}</div>
+        <div>
+          <div class="psc-title">Premium Active${userPremiumPlan ? ' · '+userPremiumPlan : ''}</div>
+          <div class="psc-sub">Expires: ${fmtDate(userPremiumExpiry)}</div>
+        </div>
+      </div>
+      <button class="psc-btn" onclick="closeProfile();setTimeout(openPremiumSheet,300)">Extend Membership</button>`;
+  } else {
+    el.innerHTML = `
+      <div class="psc-row">
+        <div class="psc-icon">${svgCrown(18)}</div>
+        <div>
+          <div class="psc-title">Not a Premium Member</div>
+          <div class="psc-sub">Go ad-free and unlock all premium content</div>
+        </div>
+      </div>
+      <button class="psc-btn" onclick="closeProfile();setTimeout(openPremiumSheet,300)">Get Premium</button>`;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   CATEGORIES
+════════════════════════════════════════════════════════════ */
+function loadCategories() {
+  const grid = $id('cat-grid');
+  grid.innerHTML = '';
+  for (let i = 0; i < 6; i++) {
+    grid.innerHTML += `<div class="skeleton-card"><div class="skel-thumb"></div><div class="skel-text"></div><div class="skel-text2"></div></div>`;
+  }
+
+  catUnsub = db.collection('categories').where('active','==',true)
+    .onSnapshot(snap => {
+      if (snap.empty) { allCategoryDocs = []; renderCats([]); return; }
+      let docs = [];
+      snap.forEach(doc => docs.push(doc));
+      docs.sort((a,b) => (a.data().order||0)-(b.data().order||0));
+      allCategoryDocs = docs;
+      renderCats(filterDocs());
+    }, () => {
+      $id('cat-grid').innerHTML = `<div class="empty-state"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><div class="es-title">Could not load</div><div class="es-sub">Check your connection and try again.</div></div>`;
+    });
+}
+
+function filterDocs() {
+  let docs = allCategoryDocs;
+  
+  // অফলাইন মোড চেক (আগের মতোই থাকবে)
+  if (!isOnline) docs = docs.filter(d => d.data().offline === true);
+
+  // যদি সার্চবক্সে কিছু লেখা থাকে (পাওয়ারফুল Fuzzy Search)
+  if (searchQuery) {
+    const options = {
+      keys: ['name', 'tags', 'type'], // নাম, ট্যাগ এবং টাইপ—সবখানে খুঁজবে
+      threshold: 0.4, // বানান সামান্য ভুল হলেও খুঁজে পাবে
+    };
+
+    // Fuse.js দিয়ে ডাটা প্রসেস করা
+    const fuse = new Fuse(docs.map(d => ({...d.data(), id: d.id, _originalDoc: d})), options);
+    const results = fuse.search(searchQuery);
+    
+    // রেজাল্টগুলো আগের ফরম্যাটে ফেরত পাঠানো
+    return results.map(r => r.item._originalDoc);
+  }
+
+  return docs;
+}
+
+function getPopularSet(docs) {
+  const withV = docs.filter(d => (d.data().views||0) > 0);
+  return new Set([...withV].sort((a,b)=>(b.data().views||0)-(a.data().views||0)).slice(0,3).map(d=>d.id));
+}
+
+function fmtViews(n) {
+  n = n||0;
+  if (n >= 1e6) return (n/1e6).toFixed(1).replace(/\.0$/,'')+'M';
+  if (n >= 1e3) return (n/1e3).toFixed(1).replace(/\.0$/,'')+'K';
+  return n > 0 ? String(n) : '';
+}
+
+function renderCats(docs) {
+  const grid = $id('cat-grid');
+  grid.innerHTML = '';
+
+  if (!isOnline && !allCategoryDocs.filter(d=>d.data().offline).length) {
+    grid.innerHTML = `<div class="offline-state"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="2" x2="22" y2="22"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><path d="M5 12.5a10 10 0 0 1 3-2"/><path d="M12 20h.01"/></svg><div class="os-title">No internet connection</div><div class="os-sub">Connect to the internet to browse content.</div></div>`;
+    return;
+  }
+  if (!docs.length) {
+    grid.innerHTML = `<div class="empty-state"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg><div class="es-title">${searchQuery ? 'No results found' : 'No categories available'}</div><div class="es-sub">${searchQuery ? 'Try a different search term.' : 'Check back soon for new content.'}</div></div>`;
+    return;
+  }
+
+  const popularSet = getPopularSet(docs);
+
+  docs.forEach((doc, i) => {
+    const d           = doc.data();
+    const isApk        = d.type === 'apk';
+    const isPremiumOnly= !!d.premiumOnly;
+    const isLocked     = isPremiumOnly && !isPremiumActive;
+    const isNew        = !!d.isNew;
+    const views        = d.views || 0;
+    const isPopular    = popularSet.has(doc.id);
+
+    if (!userAdsDisabled && i === 4 && window._infeedAd) {
+      const ad  = window._infeedAd;
+      const adc = document.createElement('div');
+      adc.className = 'ad-infeed';
+      adc.innerHTML = `<span class="ad-label">AD</span>${ad.imageUrl ? `<a href="${ad.linkUrl||'#'}" target="_blank" onclick="trackAdClick('${ad.id||''}')"><img src="${ad.imageUrl}" alt="Ad" onerror="this.parentElement.style.display='none'"></a>` : ''}<div class="ad-caption">${ad.text||'Advertisement'}</div>`;
+      grid.appendChild(adc);
+      trackAdImpression(ad.id);
+    }
+
+    const card = document.createElement('div');
+    card.className = 'cat-card' + (isLocked ? ' locked' : '');
+    card.style.animationDelay = (i * 0.04) + 's';
+
+    const fallbackSvg = isApk
+      ? `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted)"><path d="M21 8 12 3 3 8l9 5 9-5z"/><path d="M3 8v9l9 5 9-5V8"/><path d="M12 13v9"/></svg>`
+      : `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted)"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>`;
+
+    const imgHtml = d.logo
+      ? `<img src="${d.logo}" alt="${escHtml(d.name)}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'cat-thumb-fallback\\'>${fallbackSvg.replace(/'/g,"\\'")}</div>'">`
+      : `<div class="cat-thumb-fallback">${fallbackSvg}</div>`;
+
+    card.innerHTML = `
+      <div class="cat-thumb">
+        ${imgHtml}
+        ${isApk && !isLocked ? `<span class="thumb-badge badge-apk"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg> APK</span>` : ''}
+        ${d.offline && !isLocked ? `<span class="thumb-badge badge-offline" style="right:8px;left:auto;">OFFLINE</span>` : ''}
+        ${isNew && !isLocked ? `<span class="thumb-badge badge-new">NEW</span>` : ''}
+        ${isLocked ? `<div class="lock-badge">${svgLock(18)}</div>` : ''}
+      </div>
+      <div class="cat-body">
+        <div class="cat-name">${escHtml(d.name)}</div>
+        <div class="cat-meta">
+          ${fmtViews(views) ? `<span class="meta-chip views"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>${fmtViews(views)}</span>` : ''}
+          ${isPopular ? `<span class="meta-chip popular"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Trending</span>` : ''}
+          ${isPremiumOnly ? `<span class="meta-chip premium"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Premium</span>` : ''}
+        </div>
+      </div>`;
+
+    card.addEventListener('click', () => isLocked ? showLockedPrompt() : handleCatClick(d, doc.id));
+    grid.appendChild(card);
+  });
+}
+
+function showLockedPrompt() {
+  showToast('This content is for Premium members', 'warning');
+  setTimeout(openPremiumSheet, 650);
+}
+
+function handleCatClick(data, id) {
+  incrementViews(id);
+  if (data.type === 'apk') {
+    if (!currentUser) { pendingApkData = { data, id }; openLR('Sign in to download APK files.'); }
+    else startInAppDownload(data, id);
+  } else {
+    openViewer(data);
+  }
+}
+
+function incrementViews(id) {
+  if (id) db.collection('categories').doc(id).update({ views: firebase.firestore.FieldValue.increment(1) }).catch(()=>{});
+}
+
+/* ════════════════════════════════════════════════════════════
+   IN-APP DOWNLOAD — REAL DOWNLOAD, NO BROWSER OPEN
+════════════════════════════════════════════════════════════ */
+let dlTimer = null;
+
+function startInAppDownload(data, id) {
+  // Clear any previous timer
+  if (dlTimer) { clearInterval(dlTimer); dlTimer = null; }
+
+  // Set up UI
+  const screen = $id('download-screen');
+  const iconEl = $id('dl-screen-icon');
+
+  // App icon
+  if (data.logo) {
+    iconEl.innerHTML = `<img src="${data.logo}" alt="${escHtml(data.name)}" onerror="this.parentElement.innerHTML='<div class=\\'dl-screen-icon-fallback\\'><svg width=\\'40\\' height=\\'40\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'1.5\\'><path d=\\'M21 8 12 3 3 8l9 5 9-5z\\'/><path d=\\'M3 8v9l9 5 9-5V8\\'/><path d=\\'M12 13v9\\'/></svg></div>'">`;
+  } else {
+    iconEl.innerHTML = `<div class="dl-screen-icon-fallback"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8l9 5 9-5z"/><path d="M3 8v9l9 5 9-5V8"/><path d="M12 13v9"/></svg></div>`;
+  }
+
+  $id('dl-screen-name').textContent = data.name;
+  $id('dl-screen-sub').textContent  = 'Please wait while your file downloads…';
+
+  // Reset steps
+  for (let i = 0; i < 4; i++) {
+    const s = $id('dl-step-' + i);
+    s.classList.remove('active', 'done');
+  }
+
+  // Reset progress
+  $id('dl-bar').style.width = '0%';
+  $id('dl-pct').textContent = '0%';
+  $id('dl-progress-status').textContent = 'Connecting…';
+  $id('dl-speed').textContent = 'Preparing…';
+  $id('dl-size-text').textContent = '';
+
+  // Hide complete, show progress
+  $id('dl-progress-section').style.display = 'block';
+  $id('dl-steps').style.display = 'flex';
+  $id('dl-complete-box').classList.remove('show');
+
+  // Show screen (no browser open)
+  screen.classList.add('visible');
+  screen.style.display = 'flex';
+  window.history.pushState({ dlScreen: true }, '');
+
+  // ── TRIGGER THE REAL DOWNLOAD SILENTLY ──
+  // Uses fetch + blob to download without opening browser
+  _triggerRealDownload(data);
+
+  // ── RUN PROGRESS ANIMATION ──
+  _animateDownloadProgress(data);
+
+  // Save to history
+  _saveDlHistory(data, id);
+}
+
+function _triggerRealDownload(data) {
+  // এপিকে (APK) তৈরি করার পর এরর বন্ধ করার জন্য এই সহজ পদ্ধতিটি ব্যবহার করা হলো
+  const url = data.value;
+  const fileName = (data.name || 'app').replace(/[^a-z0-9_\-\.]/gi, '_') + '.apk';
+
+  // সরাসরি ডাউনলোড শুরু করার জন্য একটি অদৃশ্য লিংক তৈরি করছি
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = fileName;
+  a.style.display = 'none';
+  document.body.appendChild(a);
+  a.click();
+  
+  // ১ সেকেন্ড পর লিংকটি মেমোরি থেকে মুছে দিচ্ছি
+  setTimeout(() => {
+    if (document.body.contains(a)) {
+      document.body.removeChild(a);
+    }
+  }, 1000);
+}
+
+function _animateDownloadProgress(data) {
+  // Realistic speed strings
+  const speeds = ['1.2 MB/s', '2.8 MB/s', '3.5 MB/s', '4.1 MB/s', '5.0 MB/s', '3.8 MB/s', '4.6 MB/s', '2.9 MB/s'];
+  const stepLabels = ['Connecting to server…', 'Downloading file…', 'Verifying integrity…', 'Finalizing…'];
+
+  // Fake file size
+  const sizeMB = (Math.random() * 40 + 10).toFixed(1);
+
+  let pct = 0;
+  let currentStep = 0;
+
+  // Activate first step
+  $id('dl-step-0').classList.add('active');
+
+  dlTimer = setInterval(() => {
+    // Non-linear progress — fast at start, slow in middle, fast at end
+    let increment;
+    if      (pct < 20)  increment = Math.random() * 3 + 2;
+    else if (pct < 60)  increment = Math.random() * 1.5 + 0.5;
+    else if (pct < 85)  increment = Math.random() * 2 + 1;
+    else if (pct < 98)  increment = Math.random() * 0.8 + 0.3;
+    else                increment = 0.1;
+
+    pct = Math.min(pct + increment, 99.5);
+    const pctInt = Math.floor(pct);
+
+    $id('dl-bar').style.width = pct + '%';
+    $id('dl-pct').textContent  = pctInt + '%';
+    $id('dl-speed').textContent = speeds[Math.floor(Math.random() * speeds.length)];
+    $id('dl-size-text').textContent = (sizeMB * pct / 100).toFixed(1) + ' / ' + sizeMB + ' MB';
+
+    // Step transitions
+    const newStep = pct < 15 ? 0 : pct < 50 ? 1 : pct < 85 ? 2 : 3;
+    if (newStep !== currentStep) {
+      $id('dl-step-' + currentStep).classList.remove('active');
+      $id('dl-step-' + currentStep).classList.add('done');
+      currentStep = newStep;
+      $id('dl-step-' + currentStep).classList.add('active');
+    }
+    $id('dl-progress-status').textContent = stepLabels[currentStep];
+
+    // Complete
+    if (pct >= 99.5) {
+      clearInterval(dlTimer);
+      dlTimer = null;
+      setTimeout(_showDownloadComplete, 400);
+    }
+  }, 120);
+}
+
+function _showDownloadComplete() {
+  // Mark last step done
+  for (let i = 0; i < 4; i++) {
+    $id('dl-step-' + i).classList.add('done');
+    $id('dl-step-' + i).classList.remove('active');
+  }
+  $id('dl-bar').style.width = '100%';
+  $id('dl-pct').textContent = '100%';
+  $id('dl-progress-status').textContent = 'Complete!';
+  $id('dl-speed').textContent = 'Done';
+
+  setTimeout(() => {
+    $id('dl-progress-section').style.display = 'none';
+    $id('dl-steps').style.display = 'none';
+    $id('dl-complete-box').classList.add('show');
+    $id('dl-screen-sub').textContent = 'Your file has been saved to Downloads folder';
+  }, 500);
+}
+
+function _saveDlHistory(data, id) {
+  const entry = {
+    id: id || Date.now().toString(),
+    name: data.name,
+    date: new Date().toISOString(),
+    logo: data.logo || '',
+  };
+  downloadHistory = [entry, ...downloadHistory.filter(e => e.id !== entry.id)].slice(0, 50);
+  localStorage.setItem('ic_downloads', JSON.stringify(downloadHistory));
+  updateDlBadge();
+  if (activeTab === 'downloads') renderDownloads();
+}
+
+function closeDlScreen() {
+  if (dlTimer) { clearInterval(dlTimer); dlTimer = null; }
+  $id('download-screen').style.display = 'none';
+  $id('download-screen').classList.remove('visible');
+  showToast('Download saved to your device', 'success');
+}
+
+window.addEventListener('popstate', e => {
+  if (e.state && e.state.dlScreen) {
+    closeDlScreen(); return;
+  }
+  if ($id('content-screen').style.display === 'flex') goBack();
+});
+
+/* ════════════════════════════════════════════════════════════
+   VIEWER (iframe)
+════════════════════════════════════════════════════════════ */
+function openViewer(data) {
+  $id('viewer-title').textContent = data.name;
+  const iframe = $id('content-iframe');
+  iframe.src = 'about:blank';
+  $id('content-screen').classList.add('visible');
+  $id('content-screen').style.display = 'flex';
+  window.history.pushState({ viewer: true }, '');
+  requestAnimationFrame(() => {
+    if (data.type === 'link') {
+      iframe.src = data.value;
+    } else {
+      const doc = iframe.contentWindow.document;
+      doc.open(); doc.write(data.value); doc.close();
+    }
+  });
+}
+function goBack() {
+  $id('content-screen').style.display = 'none';
+  $id('content-screen').classList.remove('visible');
+  $id('content-iframe').src = 'about:blank';
+}
+
+/* ════════════════════════════════════════════════════════════
+   DOWNLOADS LIST + BADGE
+════════════════════════════════════════════════════════════ */
+function renderDownloads() {
+  const list = $id('downloads-list');
+  if (!downloadHistory.length) {
+    list.innerHTML = `<div class="dl-empty"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg><div class="de-title">No downloads yet</div><div class="de-sub">APK files you download will appear here.</div></div>`;
+    return;
+  }
+  list.innerHTML = downloadHistory.map(e => `
+    <div class="dl-item">
+      <div class="dl-item-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8l9 5 9-5z"/><path d="M3 8v9l9 5 9-5V8"/><path d="M12 13v9"/></svg>
+      </div>
+      <div class="dl-item-info">
+        <div class="dl-item-name">${escHtml(e.name)}</div>
+        <div class="dl-item-date">${fmtDate(e.date)}</div>
+      </div>
+      <span class="dl-item-badge">APK</span>
+    </div>`).join('');
+}
+
+function updateDlBadge() {
+  const badge = $id('dl-badge');
+  const count = downloadHistory.length;
+  badge.textContent = count > 9 ? '9+' : String(count);
+  badge.classList.toggle('show', count > 0);
+}
+updateDlBadge();
+
+/* ════════════════════════════════════════════════════════════
+   TABS)
+════════════════════════════════════════════════════════════ */
+function showTab(name) {
+  activeTab = name;
+  $id('tab-home').style.display      = name === 'home'      ? 'block' : 'none';
+  $id('tab-downloads').style.display = name === 'downloads' ? 'block' : 'none';
+  $id('nav-home').classList.toggle('active',      name === 'home');
+  $id('nav-downloads').classList.toggle('active', name === 'downloads');
+  if (name === 'downloads') renderDownloads();
+}
+
+/* ════════════════════════════════════════════════════════════
+   SEARCH
+════════════════════════════════════════════════════════════ */
+function toggleSearch() {
+  const wrap = $id('search-wrap');
+  const btn  = $id('btn-search');
+  const open = wrap.classList.toggle('open');
+  btn.classList.toggle('active', open);
+  if (open) setTimeout(() => $id('search-input').focus(), 200);
+  else clearSearch();
+}
+function clearSearch() {
+  searchQuery = '';
+  const inp = $id('search-input');
+  if (inp) inp.value = '';
+  $id('search-clear').style.display = 'none';
+  renderCats(filterDocs());
+}
+function onSearchInput(e) {
+  searchQuery = e.target.value.trim();
+  $id('search-clear').style.display = searchQuery ? 'flex' : 'none';
+  renderCats(filterDocs());
+}
+
+/* ════════════════════════════════════════════════════════════
+   ADS
+════════════════════════════════════════════════════════════ */
+function refreshAdsForUser() {
+  if (userAdsDisabled) { hideAllAds(); return; }
+  loadAds();
+}
+function hideAllAds() {
+  ['ad-top-banner','ad-mid-strip','ad-bottom-fixed','ad-corner','ad-ticker',
+   'ad-content-bottom','ad-profile-banner','ad-auth-banner'].forEach(id => {
+    const el = $id(id);
+    if (el) { el.classList.remove('show'); el.innerHTML = ''; }
+  });
+  $id('ad-popup-overlay').classList.remove('open');
+  window._infeedAd = null;
+}
+function loadAds() {
+  db.collection('ads').where('active','==',true).get()
+    .then(snap => snap.forEach(doc => renderAd({ ...doc.data(), id: doc.id })))
+    .catch(()=>{});
+}
+function trackAdImpression(id) { if (id) db.collection('ads').doc(id).update({ impressions: firebase.firestore.FieldValue.increment(1) }).catch(()=>{}); }
+function trackAdClick(id)       { if (id) db.collection('ads').doc(id).update({ clicks:      firebase.firestore.FieldValue.increment(1) }).catch(()=>{}); }
+
+function renderAd(ad) {
+  if (userAdsDisabled) return;
+  const {slot, imageUrl:img='', linkUrl:link='#', text:txt='', id:adId=''} = ad;
+  const mkImg = (r='') => img
+    ? `<a href="${link}" target="_blank" rel="noopener" onclick="trackAdClick('${adId}')"><img src="${img}" alt="Ad" style="${r}" onerror="this.parentElement.style.display='none'"></a>`
+    : '';
+  switch(slot) {
+    case 1:  if(img){const e=$id('ad-top-banner');e.innerHTML=mkImg('width:100%;border-radius:14px;display:block;');e.classList.add('show');trackAdImpression(adId);} break;
+    case 2:  window._infeedAd=ad; break;
+    case 3:  if(img){const e=$id('ad-mid-strip');if(e){e.innerHTML=mkImg('width:100%;display:block;border-radius:12px;');e.classList.add('show');trackAdImpression(adId);}} break;
+    case 4:  if(img){$id('ad-bottom-inner').innerHTML=mkImg('width:100%;border-radius:8px;display:block;');$id('ad-bottom-fixed').classList.add('show');trackAdImpression(adId);} break;
+    case 5:  if(img){$id('ad-corner-inner').innerHTML=mkImg('width:100%;display:block;');$id('ad-corner').classList.add('show');trackAdImpression(adId);} break;
+    case 6:
+      if(!adPopupShown){
+        adPopupShown=true;
+        $id('ad-popup-inner').innerHTML=img?`<a href="${link}" target="_blank" onclick="trackAdClick('${adId}')"><img src="${img}" style="width:100%;display:block;" alt="Ad"></a>`:'';
+        $id('ad-popup-caption').textContent=txt;
+        setTimeout(()=>{$id('ad-popup-overlay').classList.add('open');trackAdImpression(adId);},2500);
+      }
+      break;
+    case 7:  if(img){const e=$id('ad-content-bottom');e.innerHTML=mkImg('width:100%;border-radius:8px;display:block;');e.classList.add('show');trackAdImpression(adId);} break;
+    case 8:
+      if(txt){
+        const seg=`<span class="ticker-segment"><span class="ticker-ad-pill">AD</span>${escHtml(txt)}</span>`;
+        $id('ticker-track').innerHTML=seg+seg;
+        $id('ad-ticker').classList.add('show');trackAdImpression(adId);
+      }
+      break;
+    case 9:  if(img){const e=$id('ad-profile-banner');e.innerHTML=mkImg('width:100%;border-radius:10px;display:block;');e.classList.add('show');trackAdImpression(adId);} break;
+    case 10: if(img){const e=$id('ad-auth-banner');e.innerHTML=mkImg('width:100%;border-radius:10px;display:block;');e.classList.add('show');trackAdImpression(adId);} break;
+  }
+}
+function closeAdPopup() { $id('ad-popup-overlay').classList.remove('open'); }
+
+/* ════════════════════════════════════════════════════════════
+   PREMIUM SHEET — WITH MULTI-PAYMENT METHODS
+════════════════════════════════════════════════════════════ */
+function handlePremiumClick() {
+  if (!currentUser) { pendingPremiumOpen=true; openLR('Sign in to access Premium membership.'); return; }
+  openPremiumSheet();
+}
+function openPremiumSheet()  { $id('premium-overlay').classList.add('open'); renderPremiumBody('plans'); }
+function closePremiumSheet() { $id('premium-overlay').classList.remove('open'); }
+function premiumBgClick(e)   { if(e.target===$id('premium-overlay')) closePremiumSheet(); }
+
+async function renderPremiumBody(screen, planIdx) {
+  const body = $id('premium-body');
+  body.innerHTML = `<div style="text-align:center;padding:32px 0;color:var(--muted);">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="animation:spin 1.2s linear infinite"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+  </div>`;
+
+  if (isPremiumActive && screen === 'plans') { buildPremiumActive(body); return; }
+
+  if (screen === 'plans' && currentUser) {
+    try {
+      const snap = await db.collection('premiumRequests')
+        .where('uid','==',currentUser.uid).where('status','==','pending').limit(1).get();
+      if (!snap.empty) { buildPremiumPending(body); return; }
+    } catch(e) {}
+  }
+
+  if (screen === 'plans')          buildPremiumPlans(body);
+  else if (screen === 'payment')   buildPremiumPayment(body, planIdx);
+}
+
+function buildPremiumActive(body) {
+  const exp = userPremiumExpiry ? fmtDate(userPremiumExpiry) : '—';
+  body.innerHTML = `
+    <div class="state-box">
+      <div class="state-icon" style="color:var(--success)">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="state-title">Premium Active!</div>
+      <div class="state-sub">Your membership is active.<br>Expires: <strong style="color:var(--text)">${exp}</strong></div>
+    </div>
+    <div style="padding:0 0 20px">${featureList()}</div>`;
+}
+
+function buildPremiumPending(body) {
+  body.innerHTML = `
+    <div class="state-box">
+      <div class="state-icon" style="color:var(--warning)">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div class="state-title">Request Pending</div>
+      <div class="state-sub">Your premium request has been submitted.<br>The admin will verify your payment and activate your account.<br><br>This usually takes 1–24 hours.</div>
+    </div>`;
+}
+
+async function buildPremiumPlans(body) {
+let plans = [], pmethods = {};
+  try {
+    const snap = await db.collection('settings').doc('premium').get();
+    if (snap.exists) {
+      const d = snap.data();
+      plans = d.plans || []; // এডমিন থেকে মেম্বারশিপ প্ল্যান লোড হবে
+
+      // এডমিন প্যানেলের স্ক্রিনশট অনুযায়ী পেমেন্ট কন্ট্রোল
+      const mainNo = d.paymentNumber || "";
+      const note   = d.paymentNote || "Send Money -> Personal";
+
+      if (mainNo) {
+        // যদি এডমিনে নাম্বার থাকে তবে বিকাশ, নগদ, রকেট অটোমেটিক চালু হবে
+        pmethods.bkash  = { enabled: true, name: 'bKash', number: mainNo, note: note };
+        pmethods.nagad  = { enabled: true, name: 'Nagad', number: mainNo, note: note };
+        pmethods.rocket = { enabled: true, name: 'Rocket', number: mainNo, note: note };
+      }
+
+      // কার্ড পেমেন্ট কন্ট্রোল (আপনার স্ক্রিনশটের ম্যাপ অনুযায়ী)
+      if (d.paymentMethods && d.paymentMethods.card) {
+        pmethods.card = { 
+          enabled: d.paymentMethods.card.enabled === true, 
+          name: 'Card' 
+        };
+      }
+    }
+  } catch(e) { console.error("Premium Load Error:", e); }
+
+  // যদি এডমিনে কোনো প্ল্যান না থাকে তবে এই ডিফল্টগুলো দেখাবে
+  if (!plans.length) {
+    plans = [
+      { name:'1 Month',  days:30,  price:'৳199',  badge:'' },
+      { name:'3 Months', days:90,  price:'৳499',  badge:'Popular' },
+      { name:'1 Year',   days:365, price:'৳1499', badge:'Best Value' }
+    ];
+  }
+
+  premiumPlans   = plans;
+  paymentMethods = pmethods;
+
+  body.innerHTML = `
+    ${featureList()}
+    <div class="plan-list">
+      ${plans.map((p,i)=>`
+        <div class="plan-card" onclick="renderPremiumBody('payment',${i})">
+          <div class="plan-info">
+            <div class="plan-name">${escHtml(p.name)}</div>
+            <div class="plan-days">${p.days} days membership</div>
+          </div>
+          <div class="plan-right">
+            ${p.badge?`<span class="plan-badge">${escHtml(p.badge)}</span>`:''}
+            <span class="plan-price">${escHtml(p.price)}</span>
+          </div>
+        </div>`).join('')}
+    </div>
+    <p style="font-size:11.5px;color:var(--muted);text-align:center;margin-top:14px;padding-bottom:8px;">Select a plan to continue</p>`;
+}
+
+function buildPremiumPayment(body, planIdx) {
+  if (planIdx === undefined || planIdx === null) planIdx = selectedPlanIdx;
+  selectedPlanIdx = planIdx;
+  const plan = premiumPlans[planIdx];
+  if (!plan) { renderPremiumBody('plans'); return; }
+
+  const pm = paymentMethods;
+
+  // Build method buttons — only show enabled ones
+const methodDefs = [
+    { key: 'bkash',  logo: 'https://iili.io/CoyYB2V.md.png', color: '#E2136E' },
+    { key: 'nagad',  logo: 'https://iili.io/Coy7Sgp.md.jpg', color: '#F05A28' },
+    { key: 'rocket', logo: 'https://iili.io/Coy70sj.md.png', color: '#8332AC' },
+    { key: 'card',   emoji: '💳', color: '#4F8EF7' },
+    { key: 'crypto', emoji: '₿',  color: '#F7B955' },
+    { key: 'other',  emoji: '🏦', color: '#3DD68C' },
+  ];
+
+  const enabledMethods = methodDefs.filter(m => {
+    const cfg = pm[m.key];
+    return cfg ? cfg.enabled !== false : false;
+  });
+
+  // Default first selected method
+  selectedPayMethod = enabledMethods.length ? enabledMethods[0].key : '';
+
+  body.innerHTML = `
+    <div class="back-link" onclick="renderPremiumBody('plans')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      All plans
+    </div>
+
+    <div class="plan-selected-box">
+      <div class="psb-label">Selected plan</div>
+      <div class="psb-value">${escHtml(plan.name)} — ${escHtml(plan.price)}</div>
+    </div>
+
+    <div class="pay-method-title">Select Payment Method</div>
+    <div class="pay-methods-grid" id="pay-methods-grid">
+      ${enabledMethods.map(m => {
+        const cfg = pm[m.key] || {};
+        return `
+        <div class="pay-method-btn ${m.key === selectedPayMethod ? 'selected' : ''}"
+             id="pmb-${m.key}" onclick="selectPayMethod('${m.key}')">
+          <div class="pay-method-check">
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+<div class="pay-method-icon" style="background:${m.color}22;">
+  ${m.logo ? `<img src="${m.logo}" style="width:100%; height:100%; object-fit:contain;">` : m.emoji}
+</div>
+          <div class="pay-method-name">${escHtml(cfg.name || m.key)}</div>
+        </div>`;
+      }).join('')}
+    </div>
+
+    <!-- Mobile Money Form (bKash / Nagad / Rocket) -->
+    <div class="mobile-pay-form ${['bkash','nagad','rocket'].includes(selectedPayMethod) ? 'show' : ''}" id="mobile-pay-form">
+      <div id="mobile-pay-inner"></div>
+      <div class="trx-label">Your Transaction ID (TrxID)</div>
+      <input type="text" class="trx-input" id="trx-id-input"
+             placeholder="e.g. 8N9X7HK2F1" autocomplete="off" spellcheck="false">
+      <div class="form-error" id="premium-err-mobile"></div>
+      <button class="premium-submit" id="premium-submit-mobile"
+              onclick="submitPremiumRequest('mobile')">
+        ${svgCrown(16)} Submit & Verify Payment
+      </button>
+      <p class="premium-note">Enter the TrxID from your payment confirmation SMS.<br>Admin will verify and activate within 1–24 hours.</p>
+    </div>
+
+    <!-- Card Payment Form -->
+    <div class="card-pay-form ${selectedPayMethod === 'card' ? 'show' : ''}" id="card-pay-form">
+      <div class="card-preview" id="card-preview-el">
+        <div class="card-chip"></div>
+        <div class="card-num-display" id="card-num-display">•••• •••• •••• ••••</div>
+        <div class="card-bottom">
+          <div>
+            <div class="card-holder-label">Card Holder</div>
+            <div class="card-holder-name" id="card-holder-display">YOUR NAME</div>
+          </div>
+          <div>
+            <div class="card-exp-label">Expires</div>
+            <div class="card-exp-val" id="card-exp-display">MM/YY</div>
+          </div>
+          <div class="card-network" id="card-network">💳</div>
+        </div>
+      </div>
+
+      <div class="field-wrap">
+        <span class="field-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></span>
+        <input type="tel" class="field-input-card" id="card-number"
+               placeholder="Card Number" maxlength="19"
+               oninput="formatCardNum(this)" onkeyup="updateCardPreview()">
+      </div>
+      <div class="field-wrap">
+        <span class="field-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg></span>
+        <input type="text" class="field-input-card" id="card-name"
+               placeholder="Cardholder Name"
+               oninput="updateCardPreview()" style="letter-spacing:0;">
+      </div>
+      <div class="card-row">
+        <div class="field-wrap">
+          <span class="field-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+          <input type="tel" class="field-input-card" id="card-exp"
+                 placeholder="MM/YY" maxlength="5"
+                 oninput="formatCardExp(this)" onkeyup="updateCardPreview()">
+        </div>
+        <div class="field-wrap">
+          <span class="field-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+          <input type="tel" class="field-input-card" id="card-cvv"
+                 placeholder="CVV" maxlength="4">
+        </div>
+      </div>
+      <div class="form-error" id="premium-err-card"></div>
+      <button class="premium-submit" id="premium-submit-card"
+              onclick="submitPremiumRequest('card')">
+        ${svgCrown(16)} Submit Card Payment
+      </button>
+      <p class="premium-note">Card details are securely stored for admin review.<br>Admin will activate your account after verification.</p>
+    </div>
+
+    <!-- Other methods form -->
+    <div class="other-pay-form ${selectedPayMethod === 'crypto' || selectedPayMethod === 'other' ? 'show' : ''}" id="other-pay-form">
+      <div id="other-pay-inner"></div>
+      <div class="form-error" id="premium-err-other"></div>
+      <button class="premium-submit" id="premium-submit-other"
+              onclick="submitPremiumRequest('other')">
+        ${svgCrown(16)} Submit Request
+      </button>
+      <p class="premium-note">Admin will contact you after verifying your payment.</p>
+    </div>`;
+
+  // Render first method
+  _renderSelectedMethodUI(selectedPayMethod);
+}
+
+function selectPayMethod(key) {
+  // Update button states
+  document.querySelectorAll('.pay-method-btn').forEach(b => b.classList.remove('selected'));
+  const btn = $id('pmb-' + key);
+  if (btn) btn.classList.add('selected');
+
+  selectedPayMethod = key;
+  _renderSelectedMethodUI(key);
+
+  // Show/hide forms
+  const isMobile = ['bkash','nagad','rocket'].includes(key);
+  const isCard   = key === 'card';
+  const isOther  = !isMobile && !isCard;
+
+  const mf = $id('mobile-pay-form');
+  const cf = $id('card-pay-form');
+  const of = $id('other-pay-form');
+  if (mf) mf.classList.toggle('show', isMobile);
+  if (cf) cf.classList.toggle('show', isCard);
+  if (of) of.classList.toggle('show', isOther);
+}
+
+function _renderSelectedMethodUI(key) {
+  const pm  = paymentMethods;
+  const cfg = pm[key] || {};
+
+  if (['bkash','nagad','rocket'].includes(key)) {
+    const inner = $id('mobile-pay-inner');
+    if (!inner) return;
+    const num  = cfg.number || '01XXXXXXXXX';
+    const note = cfg.note   || 'Send Money → Personal';
+// ইমোজির বদলে আসল লোগো লিংক সেট করা হচ্ছে
+    let logoUrl = '';
+    if (key === 'bkash') logoUrl = 'https://iili.io/CoyYB2V.md.png';
+    else if (key === 'nagad') logoUrl = 'https://iili.io/Coy7Sgp.md.jpg';
+    else if (key === 'rocket') logoUrl = 'https://iili.io/Coy70sj.md.png';
+
+    inner.innerHTML = `
+      <div class="payment-box">
+        <div class="pb-title" style="display:flex; align-items:center; gap:8px;">
+          <img src="${logoUrl}" style="width:24px; height:24px; border-radius:4px; object-fit:contain;" alt="">
+          Send to ${escHtml(cfg.name || key)}
+        </div>
+        <div class="pb-number" id="pay-num-display">${escHtml(num)}</div>
+        <button class="copy-btn" onclick="copyText('${num.replace(/'/g,"\\'")}')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy number
+        </button>
+        <div class="pb-note" style="margin-top:10px;">${escHtml(note)}</div>
+      </div>`;
+  } else if (key === 'other' || key === 'crypto') {
+    const inner = $id('other-pay-inner');
+    if (!inner) return;
+    const info = cfg.info || 'Contact admin for payment details.';
+    inner.innerHTML = `
+      <div class="payment-box">
+        <div class="pb-title">📋 Payment Instructions</div>
+        <div class="pb-note" style="margin-top:0;">${escHtml(info)}</div>
+      </div>
+      <div class="trx-label">Reference / Transaction ID</div>
+      <input type="text" class="trx-input" id="trx-id-other"
+             placeholder="Enter reference or TrxID" autocomplete="off">`;
+  }
+}
+
+// Card preview live update
+function formatCardNum(inp) {
+  let v = inp.value.replace(/\D/g,'').slice(0,16);
+  inp.value = v.match(/.{1,4}/g)?.join(' ') || v;
+}
+function formatCardExp(inp) {
+  let v = inp.value.replace(/\D/g,'');
+  if (v.length >= 2) v = v.slice(0,2) + '/' + v.slice(2,4);
+  inp.value = v;
+}
+function updateCardPreview() {
+  const num  = ($id('card-number')?.value || '').replace(/\s/g,'').padEnd(16,'•');
+  const name = ($id('card-name')?.value   || '').toUpperCase() || 'YOUR NAME';
+  const exp  = ($id('card-exp')?.value    || '') || 'MM/YY';
+
+  const fmt = num.match(/.{1,4}/g)?.join(' ') || '•••• •••• •••• ••••';
+  const numEl  = $id('card-num-display');
+  const nameEl = $id('card-holder-display');
+  const expEl  = $id('card-exp-display');
+  const netEl  = $id('card-network');
+
+  if (numEl)  numEl.textContent  = fmt;
+  if (nameEl) nameEl.textContent = name;
+  if (expEl)  expEl.textContent  = exp;
+
+  // Detect card network
+  if (netEl) {
+    const d = num[0];
+    netEl.textContent = d === '4' ? '💙' : d === '5' ? '🔴' : d === '3' ? '🟢' : '💳';
+  }
+}
+
+async function submitPremiumRequest(type) {
+  const plan = premiumPlans[selectedPlanIdx];
+  if (!plan) return;
+
+  let trxId = '', cardData = {};
+  let errEl, btn;
+
+  if (type === 'mobile') {
+    trxId = ($id('trx-id-input')?.value || '').trim();
+    errEl = $id('premium-err-mobile');
+    btn   = $id('premium-submit-mobile');
+    if (!trxId) { showFormErr(errEl, 'Please enter your Transaction ID.'); return; }
+    if (trxId.length < 5) { showFormErr(errEl, 'Please enter a valid Transaction ID.'); return; }
+  } else if (type === 'card') {
+    const num  = ($id('card-number')?.value || '').replace(/\s/g,'');
+    const name = ($id('card-name')?.value   || '').trim();
+    const exp  = ($id('card-exp')?.value    || '').trim();
+    const cvv  = ($id('card-cvv')?.value    || '').trim();
+    errEl = $id('premium-err-card');
+    btn   = $id('premium-submit-card');
+    if (!num || !name || !exp || !cvv) { showFormErr(errEl, 'Please fill in all card details.'); return; }
+    if (num.length < 15) { showFormErr(errEl, 'Please enter a valid card number.'); return; }
+    if (cvv.length < 3)  { showFormErr(errEl, 'Please enter a valid CVV.'); return; }
+    cardData = { cardLast4: num.slice(-4), cardHolder: name, cardExp: exp };
+    trxId = 'CARD-' + num.slice(-4) + '-' + Date.now();
+  } else {
+    trxId = ($id('trx-id-other')?.value || '').trim();
+    errEl = $id('premium-err-other');
+    btn   = $id('premium-submit-other');
+    if (!trxId) { showFormErr(errEl, 'Please enter a reference or Transaction ID.'); return; }
+  }
+
+  if (errEl) errEl.classList.remove('show');
+  if (btn) { btn.classList.add('loading'); btn.innerHTML = svgCrown(16) + ' Submitting…'; }
+
+  try {
+    await db.collection('premiumRequests').add({
+      uid:            currentUser.uid,
+      email:          currentUser.email,
+      name:           currentUser.displayName || '',
+      planName:       plan.name,
+      planDays:       plan.days,
+      planPrice:      plan.price,
+      paymentMethod:  selectedPayMethod,
+      trxId,
+      ...cardData,
+      status:         'pending',
+      createdAt:      new Date().toISOString(),
+    });
+    buildPremiumPending($id('premium-body'));
+    showToast('Request submitted successfully!', 'success');
+  } catch(e) {
+    if (errEl) showFormErr(errEl, 'Could not submit. Check your connection and try again.');
+    if (btn) {
+      btn.classList.remove('loading');
+      btn.innerHTML = svgCrown(16) + ' Submit & Verify Payment';
+    }
+  }
+}
+
+function featureList() {
+  const items = [
+    'Completely ad-free experience',
+    'Access all premium content',
+    'APK file downloads',
+    'Offline content access',
+  ];
+  return `<div class="feature-list">${items.map(t=>`
+    <div class="feature-row">
+      <span class="fi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+      ${escHtml(t)}
+    </div>`).join('')}</div>`;
+}
+
+function copyText(text) {
+  if (navigator.clipboard?.writeText) {
+    navigator.clipboard.writeText(text)
+      .then(() => showToast('Copied!', 'success'))
+      .catch(() => fallbackCopy(text));
+  } else { fallbackCopy(text); }
+}
+function fallbackCopy(text) {
+  const el = document.createElement('textarea');
+  el.value = text; el.style.position = 'fixed'; el.style.opacity = '0';
+  document.body.appendChild(el); el.focus(); el.select();
+  try { document.execCommand('copy'); showToast('Copied!', 'success'); }
+  catch { showToast('Could not copy', 'error'); }
+  document.body.removeChild(el);
+}
+
+/* ════════════════════════════════════════════════════════════
+   PROFILE SHEET
+════════════════════════════════════════════════════════════ */
+function openProfile()      { $id('profile-overlay').classList.add('open'); }
+function closeProfile()     { $id('profile-overlay').classList.remove('open'); }
+function profileBgClick(e)  { if(e.target===$id('profile-overlay')) closeProfile(); }
+function confirmLogout() {
+  // ১. সরাসরি ব্রাউজারের কনফার্ম বক্স ব্যবহার করছি (এটি ১০০% কাজ করবে)
+  if (confirm("Are you sure you want to sign out?")) {
+    
+    // ২. ফায়ারবেস থেকে লগআউট
+    auth.signOut().then(() => {
+      
+      // ৩. ফোনের সব জমা থাকা ডাটা পরিষ্কার করা
+      localStorage.clear();
+      sessionStorage.clear();
+      
+      // ৪. অ্যাপটিকে ফোর্স রিলোড করা যাতে নতুন লগইন স্ক্রিন আসে
+      // এখানে আমরা URL এর শেষে একটি রেন্ডম নম্বর দিচ্ছি যাতে ক্যাশ মেমোরি ক্লিয়ার হয়
+      window.location.href = window.location.origin + window.location.pathname + "?rel=" + Date.now();
+      
+    }).catch((error) => {
+      alert("Error logging out: " + error.message);
+    });
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   AUTH
+════════════════════════════════════════════════════════════ */
+function openAuth(tab='login') { switchAuthTab(tab); $id('auth-overlay').classList.add('open'); }
+function closeAuth() { $id('auth-overlay').classList.remove('open'); }
+function authBgClick(e) { if(e.target===$id('auth-overlay')) closeAuth(); }
+
+function switchAuthTab(tab) {
+  document.querySelectorAll('.auth-tab').forEach((t,i) => t.classList.toggle('active', (i===0)===(tab==='login')));
+  $id('form-login').classList.toggle('active',  tab==='login');
+  $id('form-signup').classList.toggle('active', tab==='signup');
+  $id('login-err').classList.remove('show');
+  $id('signup-err').classList.remove('show');
+}
+
+async function doLogin() {
+  const email = $id('login-email').value.trim();
+  const pass  = $id('login-pass').value;
+  const errEl = $id('login-err');
+  const btn   = $id('login-btn');
+  if (!email||!pass) { showFormErr(errEl,'Please fill in all fields.'); return; }
+  btn.classList.add('loading'); btn.textContent = 'Signing in…';
+  try { await auth.signInWithEmailAndPassword(email,pass); closeAuth(); showToast('Welcome back!','success'); }
+  catch(e) { showFormErr(errEl, friendlyErr(e.code)); }
+  finally { btn.classList.remove('loading'); btn.textContent='Sign In'; }
+}
+
+async function doSignup() {
+  const name  = $id('signup-name').value.trim();
+  const phone = $id('signup-phone').value.trim();
+  const email = $id('signup-email').value.trim();
+  const pass  = $id('signup-pass').value;
+  const errEl = $id('signup-err');
+  const btn   = $id('signup-btn');
+  if (!name||!phone||!email||!pass) { showFormErr(errEl,'Please fill in all fields.'); return; }
+  if (pass.length < 6)              { showFormErr(errEl,'Password must be at least 6 characters.'); return; }
+  if (!/^[\d\s\+\-\(\)]{7,15}$/.test(phone)) { showFormErr(errEl,'Please enter a valid phone number.'); return; }
+  btn.classList.add('loading'); btn.textContent='Creating…';
+  try {
+    const cred = await auth.createUserWithEmailAndPassword(email, pass);
+    await cred.user.updateProfile({ displayName: name });
+    await db.collection('users').doc(cred.user.uid).set({
+      name, phone, email, uid: cred.user.uid,
+      premium: false, adsDisabled: false,
+      createdAt: new Date().toISOString(),
+    });
+    closeAuth(); showToast('Account created! Welcome.','success');
+  }
+  catch(e) { showFormErr(errEl, friendlyErr(e.code)); }
+  finally { btn.classList.remove('loading'); btn.textContent='Create Account'; }
+}
+
+function openForgot() {
+  closeAuth();
+  $id('forgot-overlay').classList.add('open');
+  $id('forgot-email').value = $id('login-email').value;
+  $id('forgot-err').classList.remove('show');
+  $id('forgot-ok').classList.remove('show');
+}
+function forgotBgClick(e) { if(e.target===$id('forgot-overlay')) $id('forgot-overlay').classList.remove('open'); }
+
+async function doForgotPassword() {
+  const email = $id('forgot-email').value.trim();
+  const btn   = $id('forgot-btn');
+  const errEl = $id('forgot-err');
+  const okEl  = $id('forgot-ok');
+  if (!email) { showFormErr(errEl,'Please enter your email address.'); return; }
+  btn.classList.add('loading'); btn.textContent='Sending…';
+  errEl.classList.remove('show'); okEl.classList.remove('show');
+  try {
+    await auth.sendPasswordResetEmail(email);
+    okEl.textContent='Reset link sent! Check your inbox.'; okEl.classList.add('show');
+    btn.textContent='Sent!';
+    setTimeout(()=>{ $id('forgot-overlay').classList.remove('open'); openAuth('login'); }, 3000);
+  }
+  catch(e) { showFormErr(errEl,friendlyErr(e.code)); btn.classList.remove('loading'); btn.textContent='Send Reset Link'; }
+}
+
+/* ════════════════════════════════════════════════════════════
+   LOGIN REQUIRED
+════════════════════════════════════════════════════════════ */
+function openLR(msg='Please sign in to continue.') {
+  $id('lr-sub-el').textContent = msg;
+  $id('login-required-overlay').classList.add('open');
+}
+function closeLR() {
+  $id('login-required-overlay').classList.remove('open');
+  pendingApkData = null; pendingPremiumOpen = false;
+}
+function lrBgClick(e) { if(e.target===$id('login-required-overlay')) closeLR(); }
+function lrSignIn() { closeLR(); openAuth('login'); }
+
+/* ════════════════════════════════════════════════════════════
+   CONFIRM MODAL
+════════════════════════════════════════════════════════════ */
+function showConfirm(title, sub, onYes) {
+  $id('confirm-title').textContent = title;
+  $id('confirm-sub').textContent   = sub;
+  confirmCb = onYes;
+  $id('confirm-overlay').classList.add('open');
+  $id('confirm-yes').onclick = () => { closeConfirm(); if(confirmCb) confirmCb(); };
+}
+function closeConfirm() { $id('confirm-overlay').classList.remove('open'); confirmCb=null; }
+
+/* ════════════════════════════════════════════════════════════
+   TOAST
+════════════════════════════════════════════════════════════ */
+function showToast(msg, type='success') {
+  const t = $id('toast');
+  if (toastTimer) clearTimeout(toastTimer);
+  t.textContent = msg;
+  t.className   = 'show ' + type;
+  toastTimer = setTimeout(() => { t.className=''; }, 2800);
+}
+
+/* ════════════════════════════════════════════════════════════
+   HELPERS
+════════════════════════════════════════════════════════════ */
+function showFormErr(el, msg) { if(el){ el.textContent=msg; el.classList.add('show'); } }
+function escHtml(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function friendlyErr(code) {
+  return ({
+    'auth/user-not-found':         'No account found with this email.',
+    'auth/wrong-password':         'Incorrect password.',
+    'auth/invalid-email':          'Please enter a valid email address.',
+    'auth/email-already-in-use':   'An account with this email already exists.',
+    'auth/weak-password':          'Password is too weak.',
+    'auth/too-many-requests':      'Too many attempts. Please try again later.',
+    'auth/invalid-credential':     'Email or password is incorrect.',
+    'auth/network-request-failed': 'No internet connection.',
+  })[code] || 'Something went wrong. Please try again.';
+}
+
+function svgCrown(sz=16) {
+  return `<svg width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18h18l-1.7-9.2-4.3 4-3-7.3-3 7.3-4.3-4L3 18z"/></svg>`;
+}
+function svgLock(sz=16) {
+  return `<svg width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>`;
+}
+
+// Keyboard shortcuts
+$id('login-pass').addEventListener('keydown',  e => { if(e.key==='Enter') doLogin(); });
+$id('signup-pass').addEventListener('keydown', e => { if(e.key==='Enter') doSignup(); });
+$id('forgot-email').addEventListener('keydown',e => { if(e.key==='Enter') doForgotPassword(); });
+$id('search-input').addEventListener('keydown',e => { if(e.key==='Escape') toggleSearch(); });
+
+// Icon buttons
+$id('btn-download').innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>`;
+$id('btn-search').innerHTML   = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`;
+$id('btn-premium').innerHTML  = svgCrown(15);
+$id('avatar-crown').innerHTML = `<svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
+
+// Init
+updateOnlineStatus();
+</script>
+</body>
+</html>
